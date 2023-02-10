@@ -1,0 +1,6 @@
+//@import "style/abstracts/mixins";
+
+body{
+  background: background-gradient(theme-var(--theme-back1), theme-var(--theme-back2));
+  color: theme-var(--theme-text1);
+}

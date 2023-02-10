@@ -1,0 +1,14 @@
+<div class="account">
+  <img src="https://thispersondoesnotexist.com/image">
+  <span>{{ user?.name || ""}}</span>
+</div>
+<div class="nav">
+  <a [routerLink]="page.link" class="nav__item" *ngFor="let page of pages">
+    <i class="fa-solid fa-{{page.icon}}"></i>
+    <span>{{ page.name }}</span>
+  </a>
+</div>
+<div class="actions">
+  <mat-slide-toggle [(ngModel)]="isLight" (toggleChange)="onChangeToggleTheme()">
+  </mat-slide-toggle>
+</div>
