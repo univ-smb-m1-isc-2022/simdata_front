@@ -1,6 +1,11 @@
-//@import "style/abstracts/mixins";
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
 
-body{
-  background: background-gradient(theme-var(--theme-back1), theme-var(--theme-back2));
+html, body{
+  background: linear-gradient(315deg, theme-var(--theme-back1), theme-var(--theme-back2));
   color: theme-var(--theme-text1);
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+a { text-decoration: none; color: inherit;}

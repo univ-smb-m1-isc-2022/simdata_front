@@ -1,0 +1,15 @@
+.button{
+  border:none;
+  padding: 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: theme-var(--theme-back1);
+  color:theme-var(--theme-text1);
+  cursor: pointer;
+
+  &--negate{
+    background: theme-var(--theme-text1);
+    color: theme-var(--theme-back1);
+  }
+}

@@ -1,0 +1,10 @@
+.input{
+  background: none;
+  color: theme-var(--theme-text1);
+  border: none;
+  //shadow
+  box-shadow: 0 0 10px 1px rgba($--color-black, 0.3);
+  border-radius: 5px;
+  font-size: 1em;
+  padding: 10px;
+}

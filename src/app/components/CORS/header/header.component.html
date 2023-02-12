@@ -1,0 +1,24 @@
+<!-- je veux une reference sur header__bar pour pouvoir le modifier sur mon TS -->
+<div class="header__bar" #header__bar >
+  <div class="account">
+    <img src="https://thispersondoesnotexist.com/image" alt="photo">
+    <span>{{ user?.name || ""}}</span>
+  </div>
+  <div class="nav">
+    <a [routerLink]="page.link" class="nav__item" *ngFor="let page of pages">
+      <i class="fa-solid fa-{{page.icon}}"></i>
+      <span>{{ page.name }}</span>
+    </a>
+  </div>
+  <div class="actions">
+    <mat-slide-toggle color="warn" [(ngModel)]="isLight" (toggleChange)="onChangeToggleTheme()">
+      <span *ngIf="isLight">Light</span>
+      <span *ngIf="!isLight">Dark</span>
+    </mat-slide-toggle>
+  </div>
+</div>
+<div class="header__outline">
+  <div class="burger" (click)="switchHeaderState()">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+</div>
