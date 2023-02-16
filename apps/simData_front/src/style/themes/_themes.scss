@@ -1,0 +1,18 @@
+@use '@angular/material' as mat;
+@import '~@angular/material/theming';
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+/* FOR MATERIAL */
+
+@include mat.core();
+
+:root.light {
+  @include spread-map($theme-map-light);
+  @include simData_front-theme('light');
+}
+
+:root.dark {
+  @include spread-map($theme-map-dark);
+  @include simData_front-theme('dark');
+}

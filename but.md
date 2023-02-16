@@ -16,8 +16,6 @@
 
 - Chaque participant va pouvoir se connecter à l'application et ajouter des données. Ces données seront ensuite soumises à validation par les autres participants.
 
-
-
 # Technologies
 
 - Java Spring Boot

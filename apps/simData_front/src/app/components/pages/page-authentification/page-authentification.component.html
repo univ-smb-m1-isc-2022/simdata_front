@@ -1,0 +1,141 @@
+<app-logo fillColor="--theme-main"></app-logo>
+
+<div class="los">
+  <div class="los__choices">
+    <button mat-button (click)="selectForm('login')">Log In</button>
+    <button mat-button (click)="selectForm('signup')">Sign Up</button>
+  </div>
+  <mat-slide-toggle [(ngModel)]="losSwitch" color="primary"> </mat-slide-toggle>
+</div>
+
+<div class="card" [ngClass]="{ 'card--flipped': losSwitch }">
+  <div class="card__face">
+    <h1 class="title">Log In</h1>
+    <form
+      class="form form--login"
+      [formGroup]="loginForm"
+      (ngSubmit)="onLoginSubmit()"
+    >
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="prefix">email</mat-icon>
+        <mat-label>email</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="Ex. yo@mama.com"
+          formControlName="email"
+        />
+        <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">Please enter a valid email address</mat-error>
+        <mat-error *ngIf="loginForm.controls['email'].hasError('required')">Email is <strong>required</strong></mat-error>
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="prefix">lock</mat-icon>
+        <mat-label>password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Ex. ******"
+          formControlName="password"
+        />
+        <mat-error *ngIf="loginForm.controls['password'].hasError('required')">Password is <strong>required</strong></mat-error>
+        <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Password must be at least 6 characters long</mat-error>
+      </mat-form-field>
+
+      <button
+        class="form__submit"
+        [disabled]="!loginForm.touched"
+        mat-flat-button
+        color="{{ stateOfForm(loginForm) }}"
+        #loginButton
+        (mouseenter)="handleSubmitButtonHover(this.loginButton, this.loginForm)"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+    <a>Forgot your password?</a>
+  </div>
+
+  <div class="card__face card__face--back">
+    <h1 class="title">Sign Up</h1>
+    <form
+      class="form form--login"
+      [formGroup]="signupForm"
+      (ngSubmit)="onSignupSubmit()"
+    >
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="prefix">person</mat-icon>
+        <mat-label>username</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Ex. yo mama"
+          formControlName="username"
+        />
+        <mat-error *ngIf="signupForm.controls['username'].hasError('required')">Username is <strong>required</strong></mat-error>
+        <mat-error *ngIf="signupForm.controls['username'].hasError('minlength')">Username must be at least 4 characters long</mat-error>
+        <mat-error *ngIf="signupForm.controls['username'].hasError('maxlength')">Username must be less than 20 characters long</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="prefix">email</mat-icon>
+        <mat-label>email</mat-label>
+        <input
+          matInput
+          type="email"
+          placeholder="Ex. yo@mama.com"
+          formControlName="email"
+        />
+        <mat-error *ngIf="signupForm.controls['email'].hasError('email') && !signupForm.controls['email'].hasError('required')">Please enter a valid email address</mat-error>
+        <mat-error *ngIf="signupForm.controls['email'].hasError('required')">Email is <strong>required</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="prefix">lock</mat-icon>
+        <mat-label>password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Ex. ******"
+          formControlName="password"
+        />
+        <mat-error *ngIf="signupForm.controls['password'].hasError('required')">Password is <strong>required</strong></mat-error>
+        <mat-error *ngIf="signupForm.controls['password'].hasError('minlength')">Password must be at least 6 characters long</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-icon matPrefix class="prefix">lock</mat-icon>
+        <mat-label>confirm password</mat-label>
+        <input
+          matInput
+          type="password"
+          placeholder="Ex. ******"
+          formControlName="passwordConfirm"
+          (keyup)="signupForm.updateValueAndValidity()"
+        />
+        <mat-error *ngIf="signupForm.controls['passwordConfirm'].hasError('required')">Password confirmation is <strong>required</strong></mat-error>
+        <mat-error *ngIf="signupForm.controls['passwordConfirm'].hasError('minlength') && !signupForm.controls['passwordConfirm'].hasError('required')">Password confirmation must be at least 6 characters long</mat-error>
+        <mat-error *ngIf="signupForm.hasError('notSame')">Passwords must match</mat-error>
+      </mat-form-field>
+
+      <button
+        class="form__submit"
+        [disabled]="!signupForm.touched"
+        mat-flat-button
+        #signupButton
+        color="{{ stateOfForm(signupForm) }}"
+        (mouseenter)="handleSubmitButtonHover(this.signupButton, this.signupForm)"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <div
+    class="back-topo"
+    [ngClass]="{ 'back-topo--negate': this.themeService.getTheme() == 'light' }"
+  ></div>
+</div>

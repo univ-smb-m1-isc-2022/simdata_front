@@ -1,0 +1,73 @@
+<!-- je veux une reference sur header__bar pour pouvoir le modifier sur mon TS -->
+<div class="header__bar" #header__bar>
+  <app-logo [fillColor]="'--theme-main'" [size]='50'  ></app-logo>
+  <ng-container *ngIf="user; then accountBlock; else connectBlock"></ng-container>
+  <ng-template #accountBlock>
+    <div [ngClass]="{ 'account--connected': user }" class="account">
+      <img src="https://thispersondoesnotexist.com/image" alt="photo" />
+      <span>{{ user?.username || '' }}</span>
+      <button
+        mat-icon-button
+        *ngIf="user"
+        class="button"
+        [matMenuTriggerFor]="menu"
+      >
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+        <ng-container *ngIf="user; then connectedMenu"></ng-container>
+        <ng-template #connectedMenu>
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </ng-template>
+      </mat-menu>
+    </div>
+  </ng-template>
+  <ng-template #connectBlock>
+    <button
+      mat-raised-button
+      color="primary"
+      class="connect"
+      (click)="login()"
+    >
+      <mat-icon class="connect__icon">account_circle</mat-icon>
+      Connect
+    </button>
+  </ng-template>
+
+  <div class="nav">
+    <a
+      [ngClass]="{ 'nav__item--active': isActive(page.link) }"
+      [routerLink]="page.link"
+      class="nav__item"
+      *ngFor="let page of pages"
+    >
+      <mat-icon>{{ page.icon }}</mat-icon>
+      <span>{{ page.name }}</span>
+    </a>
+  </div>
+  <div class="actions">
+    <mat-slide-toggle
+      class="theme_switch"
+      color="primary"
+      [(ngModel)]="isLight"
+      (toggleChange)="onChangeToggleTheme()"
+    >
+      <mat-icon class="theme_switch__icon">{{
+        isLight ? 'brightness_5' : 'brightness_3'
+      }}</mat-icon>
+    </mat-slide-toggle>
+  </div>
+</div>
+<div class="header__outline">
+  <div class="burger" (click)="switchHeaderState()">
+    <i class="fa-solid fa-bars"></i>
+  </div>
+</div>
