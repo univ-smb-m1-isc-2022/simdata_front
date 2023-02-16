@@ -16,6 +16,7 @@
   box-sizing: border-box;
   padding: 75px;
   height: 100%;
+  max-width: calc(100vw - 50px);
   //width: 400px;
   width: fit-content;
   background-color: var(--theme-back1);
@@ -25,12 +26,23 @@
   &--short {
     padding: 25px;
 
+    //if mobile hide
+    @media (max-width: 768px) {
+      display: none;
+    }
+
     .connect__icon {
       display: none;
     }
 
     .account {
+      //change rotation of background
       flex-direction: column;
+
+      img {
+        border-radius: 50% 50% 0 0 !important;
+      }
+
       span {
         display: none;
       }
@@ -49,6 +61,7 @@
     .actions {
       //center the item
       justify-content: center;
+      flex-direction: column;
       .theme_switch {
         &__icon {
           display: none;
@@ -56,91 +69,71 @@
       }
     }
   }
+}
 
-  .account {
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &__item {
     display: flex;
     gap: 25px;
     font-size: 20px;
-    align-items: center;
+    font-weight: 600;
+    text-transform: uppercase;
     padding: 10px;
-    border-radius: 50px;
-    cursor: pointer;
-
-    &--connected {
-      justify-content: space-between;
-    }
+    transition: color 0.3s ease;
+    border-radius: 10px;
+    color: theme-var(--theme-back2);
 
     &:hover {
-      background: var(--theme-back2);
+      color: theme-var(--theme-main);
     }
 
-    img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
+    i {
+      width: 30px;
+      text-align: center;
     }
-  }
 
-  .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    &__item {
-      display: flex;
-      gap: 25px;
-      font-size: 20px;
-      font-weight: 600;
-      text-transform: uppercase;
-      padding: 10px;
-      transition: color 0.3s ease;
-      border-radius: 10px;
-      color: theme-var(--theme-back2);
-
-      &:hover {
-        color: theme-var(--theme-main);
-      }
-
-      i {
-        width: 30px;
-        text-align: center;
-      }
-
-      &--active {
-        color: theme-var(--theme-text1);
-      }
+    &--active {
+      color: theme-var(--theme-text1);
     }
   }
+}
 
-  .actions {
-    display: flex;
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  justify-content: space-around;
+  width: -webkit-fill-available;
+}
 
-    .theme-switch {
-      -webkit-appearance: none;
-      outline: none;
-      width: 50px;
-      height: 25px;
-      background-color: theme-var(--theme-back2);
-      border-radius: 25px;
-      position: relative;
-      cursor: pointer;
+.account {
+  display: flex;
+  gap: 25px;
+  font-size: 20px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1px solid theme-var(--theme-back2);
+  transition: background 0.3s ease;
 
-      &:before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 25px;
-        height: 25px;
-        background-color: theme-var(--theme-text2);
-        border-radius: 50%;
-        transition: 0.2s;
-      }
+  &:hover {
+    background: theme-var(--theme-back2);
+  }
 
-      &:checked:before {
-        left: 25px;
-        background-color: $--color-1;
-      }
-    }
+  &--connected {
+    justify-content: space-between;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50% 0 0 50%;
+    transition: border-radius 0.3s ease;
   }
 }
 
@@ -149,6 +142,10 @@
   width: fit-content;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+  }
 
   .burger {
     margin: 25px 0;
@@ -174,4 +171,33 @@
   width: fit-content;
   display: flex;
   margin: 0 auto;
+}
+
+
+.theme-switch {
+  -webkit-appearance: none;
+  outline: none;
+  width: 50px;
+  height: 25px;
+  background-color: theme-var(--theme-back2);
+  border-radius: 25px;
+  position: relative;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    background-color: theme-var(--theme-text2);
+    border-radius: 50%;
+    transition: 0.2s;
+  }
+
+  &:checked:before {
+    left: 25px;
+    background-color: $--color-1;
+  }
 }

@@ -10,10 +10,15 @@ import { apiUrl} from "../../utils/globals";
 })
 export class ConnectionService {
 
+  headers: HttpHeaders;
+
   //create an observable of User
-  private userConnectedSubject = new BehaviorSubject<User | null>(null);
-  userConnected$ = this.userConnectedSubject.asObservable();
+  private userConnectedSubject = new BehaviorSubject<User|null>(null);
   constructor(private http: HttpClient, private cookieService: CookieService) {
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
     const token = this.cookieService.get('auth-token');
     if (token !== undefined) {
       this.getUserByToken(token)?.subscribe((data: any) => {
@@ -22,17 +27,14 @@ export class ConnectionService {
     }
   }
 
-  login(email: string, password: string): Promise<boolean> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+  public login(email: string, password: string): Promise<boolean> {
 
     return new Promise((resolve, reject) => {
       this.http
         .post(
           `${apiUrl}/login`,
           { email: email, password: password },
-          { headers }
+          { headers: this.headers }
         )
         .subscribe((data: any) => {
           if (data !== null) {
@@ -48,17 +50,14 @@ export class ConnectionService {
     });
   }
 
-  signUp(username: string, email: string, password: string): Promise<boolean> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
+  public signUp(username: string, email: string, password: string): Promise<boolean> {
 
     return new Promise((resolve, reject) => {
       this.http
         .post(
           `${apiUrl}/signup`,
           { username: username, email: email, password: password },
-          { headers }
+          { headers: this.headers }
         )
         .subscribe((data: any) => {
           if (data !== null) {
@@ -74,18 +73,24 @@ export class ConnectionService {
     });
   }
 
-  logout() {
+  public logout() {
     this.cookieService.delete('auth-token');
     this.userConnectedSubject.next(null);
   }
 
-  getUserByToken(token: string) {
+  public getUserByToken(token: string) {
     if (token === undefined) {
       return null;
     }
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-    return this.http.get(`${apiUrl}/user/token/${token}`, { headers });
+    return this.http.get(`${apiUrl}/user/token/${token}`, { headers: this.headers });
+  }
+
+
+  public getUser(){
+    return this.userConnectedSubject.asObservable();
+  }
+
+  getUserValue() {
+    return this.userConnectedSubject.getValue();
   }
 }

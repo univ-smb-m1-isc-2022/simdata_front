@@ -3,6 +3,7 @@ import { ThemeService } from '../../../services/theme/theme.service';
 import { User } from '../../../models/user';
 import { ConnectionService } from '../../../services/connection/connection.service';
 import { Router } from '@angular/router';
+import { Observable } from "rxjs";
 
 interface Nav {
   link: string;
@@ -18,6 +19,7 @@ interface Nav {
 export class HeaderComponent implements OnInit {
   isLight: boolean = false;
   //user is an Observable of User
+  user$: Observable<User|null>;
   user: User | null = null;
   isHeaderShort: boolean = false;
   // @ts-ignore
@@ -27,11 +29,7 @@ export class HeaderComponent implements OnInit {
     private themeService: ThemeService,
     private connectService: ConnectionService,
     private router: Router
-  ) {
-    this.connectService.userConnected$.subscribe((data: User | null) => {
-      this.user = data;
-    });
-  }
+  ) {}
 
   pages: Nav[] = [
     {
@@ -67,6 +65,13 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.user$ = this.connectService.getUser();
+    this.user = this.connectService.getUserValue();
+    this.user$.subscribe((user) => {
+      this.user = user;
+      console.log("user",user);
+    });
+
 
     //theme
     this.isLight = this.themeService.getTheme() === 'light';

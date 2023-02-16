@@ -16,7 +16,6 @@ export class LogoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("fill", this.fillColor);
     if(this.fillColor[0] == '-') {
       this.fillColor = this.sassService.readProperty(this.fillColor);
     }
