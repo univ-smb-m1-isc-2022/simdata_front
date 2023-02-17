@@ -8,10 +8,20 @@ $--color-main: #727365;
 $--color-light: #bfbfae;
 $--color-white: #f2f2e4;
 
-/* Color Theme Swatches in Hex */
+
 $--color-1: #edc436;
 $--color-2: #f69746;
 $--color-3: #eb6f5d;
 $--color-4: #ce5270;
 $--color-5: #a3437b;
 $--color-6: #6f4c7d;
+
+/* Color Theme Swatches in Hex */
+:root{
+  --color-1: #edc436;
+  --color-2: #f69746;
+  --color-3: #eb6f5d;
+  --color-4: #ce5270;
+  --color-5: #a3437b;
+  --color-6: #6f4c7d;
+}

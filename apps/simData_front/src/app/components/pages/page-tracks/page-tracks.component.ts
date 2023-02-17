@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Layout } from "../../../models/layout";
 
 @Component({
   selector: 'app-page-tracks',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./page-tracks.component.scss'],
 })
 export class PageTracksComponent implements OnInit {
+
+  layouts: Layout[] = [];
   constructor() {}
 
   ngOnInit(): void {}

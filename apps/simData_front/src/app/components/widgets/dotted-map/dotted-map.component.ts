@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { Component, ElementRef, Input, OnInit, ViewChild } from "@angular/core";
 import { SassHelperService } from "../../../services/sass-helper/sass-helper.service";
+import { Layout } from "../../../models/layout";
 
 const DottedMap = require('dotted-map').default;
 
@@ -11,32 +12,28 @@ const DottedMap = require('dotted-map').default;
 export class DottedMapComponent implements OnInit {
 
   map: any;
+
+  @Input() layouts: Layout[] = [];
   constructor(
     private elementRef: ElementRef,
     private sassService:SassHelperService
   ) {
     this.map = new DottedMap({
-      height: 60,
-      grid:'diagonal'
-    });
-
-    this.map.addPin({
-      lat: 40.73061,
-      lng: -73.935242,
-      svgOptions: { color: '#d6ff79', radius: 0.4 },
-    });
-    this.map.addPin({
-      lat: 48.8534,
-      lng: 2.3488,
-      svgOptions: { color: '#fffcf2', radius: 0.4 },
+      height: 90,
+      grid:'vertical'
     });
   }
 
   ngOnInit(): void {
-
-
-
-
+    for (let i = 0; i < this.layouts.length; i++) {
+      const color = this.sassService.readProperty(this.layouts[i].grade? "--color-" + this.layouts[i].grade: "white");
+      console.log(color);
+      this.map.addPin({
+        lat: this.layouts[i].coordinates.lat,
+        lng: this.layouts[i].coordinates.lng,
+        svgOptions: { color: color, radius: (1 - 0.1 * this.layouts[i].grade), shape: 'circle' }
+      });
+    }
   }
 
   ngAfterViewInit() {
