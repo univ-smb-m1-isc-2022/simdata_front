@@ -1,4 +1,5 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 
 :host {
   height: 100vh;
@@ -31,9 +32,9 @@
 }
 
 .card {
+  background: theme-var(--theme-back);
   width: min(500px, 90%);
   height: min(500px, 90%);
-  background-color: var(--theme-back2);
   border-radius: 10px;
   //set geometry for flip
   perspective: 1000px;
@@ -82,7 +83,6 @@
   background-size: cover;
   border-radius: inherit;
   z-index: -1;
-  opacity: 0.5;
 
   &--negate {
     filter: invert(1);
@@ -93,8 +93,11 @@
   margin-right: 10px;
 }
 
+
+
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-  background-color: var(--theme-back1) !important;
+  //$back-color : theme-var(--theme-back);
+  background: theme-var(--theme-back2) !important;
 }
 
 app-logo{

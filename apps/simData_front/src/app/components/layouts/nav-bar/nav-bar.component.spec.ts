@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderComponent } from './nav-bar.component';
+import { NavBarComponent } from './nav-bar.component';
 
 
 //TODO: fix this test

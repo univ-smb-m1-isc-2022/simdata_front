@@ -3,14 +3,11 @@
 
 html,
 body {
-  background: linear-gradient(
-    315deg,
-    theme-var(--theme-back1),
-    theme-var(--theme-back2)
-  );
-  color: theme-var(--theme-text1);
+  background: linear-gradient(235deg, theme-var(--theme-back), theme-var(--theme-back2));
+  color: theme-var(--theme-text);
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  //font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 a {

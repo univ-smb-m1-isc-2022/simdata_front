@@ -8,5 +8,18 @@
   main{
     width: 100%;
     height: 100%;
+    padding: 25px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    .scrollContent{
+      height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap:25px;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
   }
 }

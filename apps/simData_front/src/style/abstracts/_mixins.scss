@@ -1,5 +1,6 @@
 @use '@angular/material' as mat;
 @import 'variables';
+@import "colors";
 
 @mixin spread-map($map: ()) {
   @each $key, $value in $map {
@@ -22,16 +23,15 @@
   }
 }
 
-$simData_front-background: (
-  app: theme-var(--theme-back1),
-  card: theme-var(--theme-back2),
-  dialog: theme-var(--theme-back1),
-  disabled: theme-var(--theme-main),
-  raised: theme-var(--theme-back2),
-  text: theme-var(--theme-text1),
-  tooltip: theme-var(--theme-back2),
-  menu: theme-var(--theme-back2),
-);
+
+
+@function mat-var($palette,$key: 900){
+  @return mat.get-color-from-palette($palette, $key);
+}
+
+@function transparency($color, $value: 50%){
+  @return rgba($color, $value);
+}
 
 @mixin simData_front-theme($theme) {
   @if $theme == 'light' {
@@ -42,23 +42,8 @@ $simData_front-background: (
     @error "theme: '#{$theme}' is not a valid theme";
   }
 
-  //add background value to the theme
-  $color: map-get($theme, color);
-  $color: map-merge(
-    $color,
-    (
-      background: $simData_front-background,
-    )
-  );
-  $theme: map-merge(
-    $theme,
-    (
-      color: $color,
-    )
-  );
 
-  @include mat.all-component-themes($theme);
+@include mat.all-component-themes($theme);
 }
 
-//add to root the colors of colors.scss
 

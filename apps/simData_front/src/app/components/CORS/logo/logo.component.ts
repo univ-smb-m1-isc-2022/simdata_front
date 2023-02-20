@@ -6,7 +6,7 @@ import { SassHelperService } from "../../../services/sass-helper/sass-helper.ser
   templateUrl: './logo.component.html',
   styleUrls: ['./logo.component.scss'],
 })
-export class LogoComponent implements OnInit{
+export class LogoComponent{
 
   @Input() fillColor = 'black';
   @Input() size = 100;
@@ -15,9 +15,4 @@ export class LogoComponent implements OnInit{
 
   }
 
-  ngOnInit(): void {
-    if(this.fillColor[0] == '-') {
-      this.fillColor = this.sassService.readProperty(this.fillColor);
-    }
-  }
 }

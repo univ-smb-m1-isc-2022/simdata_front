@@ -24,8 +24,6 @@
           "apps/simData_front/src/assets"
         ],
         "styles": [
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/simData_front/src/styles.scss",
           "apps/simData_front/src/style/main.scss"
         ],
         "stylePreprocessorOptions": {
@@ -97,8 +95,6 @@
           "apps/simData_front/src/assets"
         ],
         "styles": [
-          "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-          "apps/simData_front/src/styles.scss",
           "apps/simData_front/src/style/main.scss"
         ],
         "stylePreprocessorOptions": {

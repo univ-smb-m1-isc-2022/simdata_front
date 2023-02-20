@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
 import { CookieService } from "../cookie/cookie.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { User } from "../../models/user";
-import { BehaviorSubject } from "rxjs";
 import { apiUrl} from "../../utils/globals";
+import { userConnectedSubject} from "../../utils/store/userConnectedStore";
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +12,7 @@ export class ConnectionService {
   headers: HttpHeaders;
 
   //create an observable of User
-  private userConnectedSubject = new BehaviorSubject<User|null>(null);
+
   constructor(private http: HttpClient, private cookieService: CookieService) {
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -22,7 +21,7 @@ export class ConnectionService {
     const token = this.cookieService.get('auth-token');
     if (token !== undefined) {
       this.getUserByToken(token)?.subscribe((data: any) => {
-        this.userConnectedSubject.next(data);
+        userConnectedSubject.next(data);
       });
     }
   }
@@ -40,7 +39,8 @@ export class ConnectionService {
           if (data !== null) {
             this.cookieService.set('auth-token', data.token, 100);
             //change the user connected
-            this.userConnectedSubject.next(data.user);
+            console.log(data.user);
+            userConnectedSubject.next(data.user);
             resolve(true);
           } else {
             this.cookieService.delete('auth-token');
@@ -63,7 +63,7 @@ export class ConnectionService {
           if (data !== null) {
             this.cookieService.set('auth-token', data.token, 100);
             //change the user connected
-            this.userConnectedSubject.next(data.user);
+            userConnectedSubject.next(data.user);
             resolve(true);
           } else {
             this.cookieService.delete('auth-token');
@@ -75,7 +75,7 @@ export class ConnectionService {
 
   public logout() {
     this.cookieService.delete('auth-token');
-    this.userConnectedSubject.next(null);
+    userConnectedSubject.next(null);
   }
 
   public getUserByToken(token: string) {
@@ -87,10 +87,10 @@ export class ConnectionService {
 
 
   public getUser(){
-    return this.userConnectedSubject.asObservable();
+    return userConnectedSubject.asObservable();
   }
 
   getUserValue() {
-    return this.userConnectedSubject.getValue();
+    return userConnectedSubject.getValue();
   }
 }

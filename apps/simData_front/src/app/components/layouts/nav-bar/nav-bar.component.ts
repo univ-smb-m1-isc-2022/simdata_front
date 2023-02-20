@@ -65,9 +65,8 @@ export class NavBarComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.user$ = this.connectService.getUser();
     this.user = this.connectService.getUserValue();
-    this.user$.subscribe((user) => {
+    this.connectService.getUser().subscribe((user) => {
       this.user = user;
     });
 
@@ -79,23 +78,9 @@ export class NavBarComponent implements OnInit {
     if (localStorage.getItem('isHeaderShort') === null) {
       localStorage.setItem('isHeaderShort', 'false');
     }
-    this.isHeaderShort = localStorage.getItem('isHeaderShort') === 'true';
-    // @ts-ignore
-    this.header__bar = document.querySelector('.header__bar');
-    // set the header state
-    this.header__bar.classList.toggle('header__bar--short', this.isHeaderShort);
   }
 
-  onChangeToggleTheme() {
-    this.isLight = !this.isLight;
-    this.themeService.toggleTheme(this.isLight ? 'light' : 'dark');
-  }
 
-  switchHeaderState() {
-    this.isHeaderShort = !this.isHeaderShort;
-    localStorage.setItem('isHeaderShort', this.isHeaderShort.toString());
-    this.header__bar.classList.toggle('header__bar--short', this.isHeaderShort);
-  }
 
   logout() {
     this.connectService.logout();
@@ -112,6 +97,7 @@ export class NavBarComponent implements OnInit {
   }
 
   isActive(link: string): boolean {
-    return this.router.url === link;
+    let urlWithoutQuery = this.router.url.split('?')[0];
+    return urlWithoutQuery === link;
   }
 }

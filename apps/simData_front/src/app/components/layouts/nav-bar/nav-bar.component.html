@@ -1,73 +1,26 @@
 <!-- je veux une reference sur header__bar pour pouvoir le modifier sur mon TS -->
-<div class="header__bar" #header__bar>
-  <app-logo [fillColor]="'--theme-main'" [size]='50'  ></app-logo>
-  <div class="nav">
-    <a
-      [ngClass]="{ 'nav__item--active': isActive(page.link) }"
-      [routerLink]="page.link"
-      class="nav__item"
-      *ngFor="let page of pages"
-    >
-      <mat-icon>{{ page.icon }}</mat-icon>
-      <span>{{ page.name }}</span>
-    </a>
-  </div>
-  <div class="actions">
-
-
-    <ng-container *ngIf="user; then accountBlock; else connectBlock"></ng-container>
-    <ng-template #accountBlock>
-      <div class="account">
-        <img src="https://thispersondoesnotexist.com/image" >
-        <span>{{ user?.username | slice:0:8 }}</span>
-        <button
-          mat-icon-button
-          *ngIf="user"
-          class="button"
-          [matMenuTriggerFor]="menu"
-        >
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        </button>
-
-        <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
-          <ng-container *ngIf="user; then connectedMenu"></ng-container>
-          <ng-template #connectedMenu>
-            <button mat-menu-item>
-              <mat-icon>account_circle</mat-icon>
-              <span>Profile</span>
-            </button>
-            <button mat-menu-item (click)="logout()">
-              <mat-icon>exit_to_app</mat-icon>
-              <span>Logout</span>
-            </button>
-          </ng-template>
-        </mat-menu>
-      </div>
-    </ng-template>
-    <ng-template #connectBlock>
-      <button
-        mat-raised-button
-        color="primary"
-        class="connect"
-        (click)="login()"
-      >
-        <mat-icon class="connect__icon">account_circle</mat-icon>
-        Connect
-      </button>
-    </ng-template>
-
-    <mat-slide-toggle
-      class="theme_switch"
-      color="primary"
-      [(ngModel)]="isLight"
-      (toggleChange)="onChangeToggleTheme()"
-    >
-    </mat-slide-toggle>
-
-  </div>
+<app-logo [fillColor]="'var(--primary)'" [size]='50'  ></app-logo>
+<div class="nav">
+  <a
+    [ngClass]="{ 'nav__item--active': isActive(page.link) }"
+    [routerLink]="page.link"
+    class="nav__item"
+    *ngFor="let page of pages"
+  >
+    <mat-icon>{{ page.icon }}</mat-icon>
+    <span>{{ page.name }}</span>
+  </a>
 </div>
-<div class="header__outline">
-  <div class="burger" (click)="switchHeaderState()">
-    <i class="fa-solid fa-bars"></i>
-  </div>
-</div>
+<ng-container *ngIf="user; then connectedBlock; else notConnectedBlock;"></ng-container>
+<ng-template #notConnectedBlock>
+  <button mat-flat-button color="primary" (click)="login()">
+    <mat-icon>login</mat-icon>
+    Login
+  </button>
+</ng-template>
+<ng-template #connectedBlock>
+  <button mat-stroked-button color="primary" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
+  </button>
+</ng-template>

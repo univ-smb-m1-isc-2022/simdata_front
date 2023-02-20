@@ -25,6 +25,8 @@ import { PageComponent } from './components/pages/page/page.component';
 import { LogoComponent } from './components/CORS/logo/logo.component';
 import { DottedMapComponent } from './components/widgets/dotted-map/dotted-map.component';
 import { HeaderComponent } from './components/layouts/header/header.component';
+import { ThemeSwitchComponent } from './components/widgets/theme-switch/theme-switch.component';
+import { CardComponent } from './components/widgets/card/card.component';
 
 
 @NgModule({
@@ -37,6 +39,8 @@ import { HeaderComponent } from './components/layouts/header/header.component';
     LogoComponent,
     DottedMapComponent,
     HeaderComponent,
+    ThemeSwitchComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
