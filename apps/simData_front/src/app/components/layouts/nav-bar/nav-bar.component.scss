@@ -13,7 +13,8 @@
   width: fit-content;
   transition: padding 0.3s ease, width 0.3s ease;
   align-items: center;
-  background: theme-var(--theme-back);
+
+  @include theme-back();
 }
 
 logo{

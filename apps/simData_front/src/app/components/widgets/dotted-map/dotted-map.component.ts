@@ -11,7 +11,7 @@ const DottedMap = require('dotted-map').default;
   templateUrl: './dotted-map.component.html',
   styleUrls: ['./dotted-map.component.scss'],
 })
-export class DottedMapComponent implements OnInit {
+export class DottedMapComponent implements OnInit{
 
   @Input() zone: Zone = {name: "world", type: "world", dots: []};
 
@@ -22,12 +22,30 @@ export class DottedMapComponent implements OnInit {
   @Input() layouts: Layout[] = [];
   constructor(
     private elementRef: ElementRef,
-    private sassService:SassHelperService
+    private sassService:SassHelperService,
+    private zoneService: ZoneService
   ) {
 
   }
 
   ngOnInit(): void {
+    this.setMap();
+    this.zoneService.getZone().subscribe((zone) => {
+      this.zone = zone;
+      console.log("update");
+      this.update();
+    });
+  }
+
+  //create a method to update the map
+
+
+  update(): void {
+    this.setMap();
+    this.show();
+  }
+
+  setMap(){
     console.log("dotted zone",this.zone);
     this.map = new DottedMap({
       height: 90,
@@ -44,16 +62,25 @@ export class DottedMapComponent implements OnInit {
         svgOptions: { color: color, radius: (1 - 0.1 * this.layouts[i].grade), shape: 'circle' }
       });
 
-
-    }
-  }
-
-  ngAfterViewInit() {
-    //get the component element
-    this.elementRef.nativeElement.innerHTML = this.map.getSVG({
+      this.elementRef.nativeElement.innerHTML = "";
+      this.elementRef.nativeElement.innerHTML = this.map.getSVG({
         radius: 0.22,
         color: this.sassService.readProperty('--primary'),
         shape: 'circle'
       });
+
+    }
+  }
+
+  show(){
+    this.elementRef.nativeElement.innerHTML = this.map.getSVG({
+      radius: 0.22,
+      color: this.sassService.readProperty('--primary'),
+      shape: 'circle'
+    });
+  }
+
+  ngAfterViewInit() {
+    this.show();
   }
 }

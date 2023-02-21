@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Zone } from "../../models/zone";
+import { world, Zone } from "../../models/zone";
 import { CountryService } from "../country/country.service";
-import { json } from "@angular-devkit/core";
+import { zoneSubject } from "../../utils/store/zone.store";
+import { Observable } from "rxjs";
+import { Card } from "../../models/card";
 
 @Injectable({
   providedIn: 'root'
@@ -44,23 +46,28 @@ export class ZoneService {
   ]
   }
 
+  getZoneValue(): Zone {
+    return zoneSubject.value;
+  }
 
-  defineZone(continent: string, country: string): Promise<Zone> {
-    return new Promise(async (resolve, reject) => {
-      if (!continent && !country) {
-        resolve({ type: "world", name: "World", dots: [] });
-      }
-      if (continent) {
-        resolve({ type: "continent", name: continent, dots: this.getDots(continent) });
-      }
-      if (country) {
-        await this.getDot(country).then((data: any) => {
-          resolve({ type: "country", name: country, dots: data });
-        });
-      } else {
-        reject("No continent or country defined");
-      }
-    });
+  getZone(): Observable<Zone>{
+    return zoneSubject.asObservable();
+  }
+
+  async defineZone(continent: string, country: string){
+    if (!continent && !country) {
+      zoneSubject.next(world);
+    }
+    if (continent) {
+      let res = { type: "continent", name: continent, dots: this.getDots(continent) };
+      zoneSubject.next(res);
+    }
+    if (country) {
+      await this.getDot(country).then((data: any) => {
+        let res = { type: "country", name: country, dots: data };
+        zoneSubject.next(res);
+      });
+    }
   }
 
   getDot(country: string): Promise<string[]> {
@@ -78,5 +85,41 @@ export class ZoneService {
       }
     }
     return [];
+  }
+
+  async getChilds(): Promise<Card[]> {
+    const zone = this.getZoneValue();
+    if (zone.type === "world") {
+      return [
+        { title: "africa", data: 60},
+        { title: "americas", data: 256 },
+        { title: "asia", data: 69},
+        { title: "europe", data: 420},
+        { title: "oceania", data: 0},
+      ];
+    }
+    if (zone.type === "continent") {
+      const countries = await this.countryService.getCountriesByContinent(
+        zone.name
+      );
+      return countries.map((country) => {
+        return { title: country.name.common, data: 0 };
+      });
+    }
+    if (zone.type === "country") {
+      return [
+        { title: "africa", data: 60},
+        { title: "americas", data: 256 },
+        { title: "asia", data: 69},
+        { title: "europe", data: 420},
+        { title: "oceania", data: 0},
+      ];
+    } else {
+      return [];
+    }
+  }
+
+  isContinent(title: string) {
+    return !!this.world[title as keyof typeof this.world];
   }
 }

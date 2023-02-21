@@ -3,12 +3,13 @@
 :host{
   display: flex;
   flex-direction: column-reverse;
-  background: theme-var(--theme-back);
+  @include theme-back();
   border-radius: 5px;
   height: auto;
   gap:5px;
   padding: 10px;
   min-width: 100px;
+  cursor: pointer;
 
   .__value{
     font-size: xx-large;

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { CookieService } from "../cookie/cookie.service";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { apiUrl} from "../../utils/globals";
-import { userConnectedSubject} from "../../utils/store/userConnectedStore";
+import { userConnectedSubject} from "../../utils/store/userConnected.store";
 
 @Injectable({
   providedIn: 'root',

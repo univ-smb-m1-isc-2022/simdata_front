@@ -1,7 +1,7 @@
 <app-page>
 
-  <app-dotted-map *ngIf="zone" [zone]="this.zone">  </app-dotted-map>
+  <app-dotted-map></app-dotted-map>
   <div class="child_cards">
-    <app-card *ngFor="let child of this.childs" [title]="child.title" [data]="child.data">  </app-card>
+    <app-card (click)="onCardChildClicked(child)" *ngFor="let child of this.childs" [title]="child.title" [data]="child.data">  </app-card>
   </div>
 </app-page>

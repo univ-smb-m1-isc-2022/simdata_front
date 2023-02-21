@@ -3,7 +3,8 @@
 
 html,
 body {
-  background: linear-gradient(235deg, theme-var(--theme-back), theme-var(--theme-back2));
+  @include theme-grad-back();
+
   color: theme-var(--theme-text);
   margin: 0;
   //font-family: Roboto, 'Helvetica Neue', sans-serif;

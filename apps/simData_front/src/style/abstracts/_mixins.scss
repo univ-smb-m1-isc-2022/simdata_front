@@ -42,8 +42,18 @@
     @error "theme: '#{$theme}' is not a valid theme";
   }
 
-
 @include mat.all-component-themes($theme);
+}
+
+@mixin theme-back(){
+  background: theme-var(--theme-back);
+  transition: background 0.5s ease;
+}
+
+@mixin theme-grad-back(){
+  @include theme-back();
+  box-shadow: inset 80vw 0 1000vw var(--theme-back2);
+  transition: box-shadow 0.5s ease, background 0.5s ease;
 }
 
 
