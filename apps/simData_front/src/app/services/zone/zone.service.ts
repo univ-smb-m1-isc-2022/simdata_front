@@ -5,6 +5,8 @@ import { zoneSubject } from "../../utils/store/zone.store";
 import { Observable } from "rxjs";
 import { Card } from "../../models/card";
 
+
+//TODO: clean un peu tout ces services et faire des stores plus propre
 @Injectable({
   providedIn: 'root'
 })
@@ -99,11 +101,13 @@ export class ZoneService {
       ];
     }
     if (zone.type === "continent") {
-      const countries = await this.countryService.getCountriesByContinent(
+      this.countryService.getCountriesByContinent(
         zone.name
-      );
-      return countries.map((country) => {
-        return { title: country.name.common, data: 0 };
+      ).subscribe((data: any) => {
+        for (let i = 0; i < data.length; i++) {
+          data[i] = { title: data[i].name.common, data: data[i].population.total };
+        }
+        return data;
       });
     }
     if (zone.type === "country") {

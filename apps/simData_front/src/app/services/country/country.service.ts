@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -6,19 +7,22 @@ import { Injectable } from '@angular/core';
 export class CountryService {
 
   url = "https://restcountries.com/v3.1/";
-  constructor() { }
+
+  headers = {
+    //cache save for 1 week
+    "Cache-Control": "max-age=604800",
+  }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   getAllCountries(){
     return fetch(this.url + "all");
   }
 
-  getCountriesByContinent(continent: string) : Promise<any[]>{
-    console.log(this.url + "region/" + continent)
-    return fetch(this.url + "region/" + continent)
-      .then((response) => response.json())
-      .then((data) => {
-        return data;
-      });
+  getCountriesByContinent(continent: string){
+    console.log(this.url + "region/" + continent, this.headers);
+    return this.http.get<any[]>(this.url + "region/" + continent, {headers: this.headers});
   }
 
   getCountryByName(country: string): any {
