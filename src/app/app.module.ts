@@ -12,15 +12,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ThemeModule} from "./modules/theme/theme.module";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
-import { LogoComponent } from './components/logo/logo.component';
+import {CoreModule} from "./modules/core/core.module";
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    NavbarComponent,
-    LogoComponent
-  ],
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        NavbarComponent,
+        NotFoundComponent
+    ],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -29,9 +30,10 @@ import { LogoComponent } from './components/logo/logo.component';
     BrowserAnimationsModule,
     ThemeModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    CoreModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

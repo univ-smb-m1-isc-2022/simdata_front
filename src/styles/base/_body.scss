@@ -3,12 +3,11 @@
 
 html,
 body {
-  @include theme-grad-back();
-
   color: theme-var(--theme-text);
   margin: 0;
   //font-family: Roboto, 'Helvetica Neue', sans-serif;
   font-family: 'Roboto', sans-serif;
+  background: linear-gradient(45deg, var(--theme-back), var(--theme-back2));
 }
 
 a {

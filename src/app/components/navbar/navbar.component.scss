@@ -47,7 +47,7 @@ logo{
 
     &--active {
       background: transparency(mat-var($p-primary), 30%);
-      border-left: 5px solid mat-var($p-primary);
+      box-shadow:inset 5px 0px 0px mat-var($p-primary);
     }
   }
 }
