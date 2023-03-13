@@ -1,0 +1,17 @@
+@import '../abstracts/variables';
+@import '../abstracts/mixins';
+
+html,
+body {
+  @include theme-grad-back();
+
+  color: theme-var(--theme-text);
+  margin: 0;
+  //font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -1,0 +1,42 @@
+@import "palettes";
+
+$--color-light: #F2F2F2;
+$--color-dark: #262840;
+
+
+$--primary: #A68A56;
+$--accent: #25fde9;
+$--warn: #c2244f;
+
+
+$datas: (
+  '--data-1': #edc436,
+  '--data-2': #f69746,
+  '--data-3': #eb6f5d,
+  '--data-4': #ce5270,
+  '--data-5': #a3437b,
+  '--data-6': #6f4c7d,
+);
+
+$theme:(
+  '--primary': $--primary,
+  '--accent': $--accent,
+  '--warn': $--warn,
+);
+
+//colors of data light theme
+$theme-map-light: (
+  '--theme-text': $--color-dark,
+  '--theme-back': $--color-light,
+  '--theme-back2': lighten($--color-light, 10%),
+);
+
+//colors of data dark theme
+$theme-map-dark: (
+  '--theme-text': $--color-light,
+  '--theme-back': $--color-dark,
+  '--theme-back2': darken($--color-dark, 10%),
+);
+
+
+

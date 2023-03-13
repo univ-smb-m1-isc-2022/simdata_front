@@ -1,3 +1,6 @@
-<app-navbar></app-navbar>
-<app-header></app-header>
-<router-outlet></router-outlet>
+<app-navbar class="nav-bar" *ngIf="showHead"></app-navbar>
+<app-header class="header" *ngIf="showHead"></app-header>
+<main class="main" [ngClass]="{'main--login': !showHead}">
+  <router-outlet></router-outlet>
+</main>
+

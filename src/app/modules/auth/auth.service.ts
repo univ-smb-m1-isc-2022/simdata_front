@@ -74,6 +74,14 @@ export class AuthService {
     });
   }
 
+  getUserConnected(){
+    return userConnectedSubject.getValue();
+  }
+
+  getUserConnectedObs(){
+    return userConnectedSubject.asObservable();
+  }
+
   public logout() {
     this.cookieService.delete('auth-token');
     userConnectedSubject.next(null);
