@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {CookieService} from "../../services/cookie/cookie.service";
+import {CookieService} from "../core/services/cookie/cookie.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {userConnectedSubject} from "./auth.store";
 import {UserService} from "../users/user.service";

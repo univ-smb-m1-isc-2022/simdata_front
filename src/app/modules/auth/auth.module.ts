@@ -20,8 +20,8 @@ import {MatIconModule} from "@angular/material/icon";
     RouterModule.forChild([
       {path: '', component: AuthPageComponent}
     ]),
-    MatButtonModule,
     CoreModule,
+    MatButtonModule,
     MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
