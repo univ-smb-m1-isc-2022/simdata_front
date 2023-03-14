@@ -32,11 +32,20 @@ jobs:
         env:
             ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
-      - name: Push to GitHub Packages
+      - name: Push to GitHub Packages of organization
         uses: docker/build-push-action@v1
         with:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: univ-smb-m1-isc-2022/simdata_front/master ${{ env.IMAGE_REPOSITORY }}/master
+          repository: univ-smb-m1-isc-2022/simdata_front/master
+          tags: latest
+
+      - name: Push to GitHub Packages of user
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: ${{ steps.read-docker-image-identifiers.outputs.IMAGE_REPOSITORY }}/master
           tags: latest
