@@ -32,5 +32,5 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
-          repository: univ-smb-m1-isc-2022/simdata_front/master Durb0/simdata_front/master
+          repository: univ-smb-m1-isc-2022/simdata_front/master durb0/simdata_front/master
           tags: latest
