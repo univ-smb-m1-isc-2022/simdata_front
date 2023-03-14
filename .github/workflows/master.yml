@@ -28,8 +28,9 @@ jobs:
 
       - id: read-docker-image-identifiers
         name: Read Docker Image Identifiers
+        run: echo ::set-env name=IMAGE_REPOSITORY::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
         env:
-            GITHUB_REPOSITORY: ${{ github.repository }}
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
       - name: Push to GitHub Packages
         uses: docker/build-push-action@v1
