@@ -1,6 +1,11 @@
-<h1>{{title | uppercase}}</h1>
+<div class="header__content">
+  <button mat-button class="header__menu-button" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1>{{title | uppercase}}</h1>
+</div>
 
-<div class="header__right">
+<div class="header__content">
   <app-theme-switch></app-theme-switch>
   <div class="account">
     <span class="account__username">{{user?.username || "Visitor"}}</span>

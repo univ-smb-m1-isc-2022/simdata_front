@@ -1,0 +1,19 @@
+@import "abstracts/mixins";
+
+:host{
+  display: flex;
+  flex-direction: column-reverse;
+  @include theme-back();
+  border-radius: 5px;
+  height: auto;
+  max-width: 200px;
+  gap:5px;
+  padding: 10px;
+  min-width: 100px;
+  cursor: pointer;
+
+  .__value{
+    font-size: xx-large;
+    font-weight: bold;
+  }
+}

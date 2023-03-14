@@ -1,10 +1,10 @@
 :host{
   display: flex;
   justify-content: space-between;
-  height: 75px;
+  height: fit-content;
 }
 
-.header__right{
+.header__content{
   display: flex;
   gap: 25px;
   align-items: center;

@@ -1,0 +1,13 @@
+<app-map
+  [zone]="zone"
+></app-map>
+<div class="cards">
+  <app-card
+    *ngFor="let card of cards"
+    [card]="card"
+    (click)="selectCard(card)"
+  ></app-card>
+</div>
+<div class="select">
+ <p>salut</p>
+</div>

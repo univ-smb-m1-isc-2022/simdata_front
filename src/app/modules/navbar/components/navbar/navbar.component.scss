@@ -1,5 +1,5 @@
-@import 'abstracts/colors';
-@import 'abstracts/mixins';
+@import 'src/styles/abstracts/colors';
+@import 'src/styles/abstracts/mixins';
 
 :host {
   display: flex;
@@ -7,7 +7,7 @@
   justify-content: space-between;
   box-sizing: border-box;
   padding: 25px;
-  height: 100%;
+  height: inherit;
   gap:50px;
   max-width: calc(100vw - 50px);
   width: fit-content;
@@ -15,6 +15,18 @@
   align-items: center;
 
   @include theme-back();
+
+  @media screen and (max-width: 1000px) {
+    .nav{
+        span{
+          display: none;
+        }
+    }
+
+    @media screen and (max-width: 600px){
+      display: none;
+    }
+  }
 }
 
 logo{
@@ -58,32 +70,4 @@ logo{
   gap: 25px;
   justify-content: space-around;
   width: -webkit-fill-available;
-}
-
-.theme-switch {
-  -webkit-appearance: none;
-  outline: none;
-  width: 50px;
-  height: 25px;
-  background-color: theme-var(--theme-back);
-  border-radius: 25px;
-  position: relative;
-  cursor: pointer;
-
-  &:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 25px;
-    height: 25px;
-    background-color: theme-var(--theme-text);
-    border-radius: 50%;
-    transition: 0.2s;
-  }
-
-  &:checked:before {
-    left: 25px;
-    background-color: var(--color-1);
-  }
 }

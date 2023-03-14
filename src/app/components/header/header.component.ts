@@ -43,4 +43,7 @@ export class HeaderComponent implements OnInit {
     this.themeService.toggleTheme(this.isLight ? 'light' : 'dark');
   }
 
+  toggleMenu() {
+    console.log('toggle menu');
+  }
 }

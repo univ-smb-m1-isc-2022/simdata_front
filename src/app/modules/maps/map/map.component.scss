@@ -1,0 +1,12 @@
+:host{
+  height: auto;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+
+
+}
+
+svg:not(:root){
+  margin: auto;
+}

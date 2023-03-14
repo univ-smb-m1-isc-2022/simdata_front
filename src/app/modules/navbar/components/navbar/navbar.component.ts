@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ThemeService} from "../../modules/theme/theme.service";
-import {User} from "../../modules/users/user.model";
+import {ThemeService} from "../../../theme/theme.service";
+import {User} from "../../../users/user.model";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {AuthService} from "../../modules/auth/auth.service";
+import {AuthService} from "../../../auth/auth.service";
 
 interface Nav {
   link: string;
@@ -23,8 +23,6 @@ export class NavbarComponent implements OnInit {
   //user is an Observable of User
   user: User | null = null;
   isHeaderShort: boolean = false;
-  // @ts-ignore
-  header__bar: Element;
 
   constructor(
     private themeService: ThemeService,

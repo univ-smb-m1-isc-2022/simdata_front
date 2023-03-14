@@ -1,18 +1,25 @@
 :host{
-  display:flex;
-  width: 100%;
-  height: 100%;
+  display: grid;
+  grid-template-columns: max-content auto;
+  width: 100vw;
+  height: 100vh;
 }
 
 
 .main{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
+  display: grid;
+  grid-template-rows: max-content;
   gap: 25px;
-  padding: 25px;
+  padding: 25px 25px 0 25px;
   box-sizing: border-box;
+  height: inherit;
+
+  .content{
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    align-items: center;
+  }
 
   &--login{
     padding: 0;
