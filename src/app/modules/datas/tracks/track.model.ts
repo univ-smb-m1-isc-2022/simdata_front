@@ -5,10 +5,10 @@ export interface Track {
 
   id: number;
   name: string;
+  country: string;
   layouts: Layout[];
-  date_created: string;
-  date_deleted: string | null;
-  coordinates: Coordinates;
+  latitude: number;
+  longitude: number;
 }
 
 
@@ -16,6 +16,9 @@ export interface Track {
 export const trackTest: Track = {
   id: 1,
   name: "Monza",
+  country: "Italy",
+  latitude: 45.6156,
+  longitude: 9.2811,
   layouts: [
     {
       id: 1,
@@ -36,10 +39,4 @@ export const trackTest: Track = {
       length: 3.793,
     }
   ],
-  date_created: "2020-01-01",
-  date_deleted: null,
-  coordinates: {
-    lat: 45.615,
-    lng: 9.281
-  }
 }

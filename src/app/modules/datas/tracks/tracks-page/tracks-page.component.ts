@@ -15,6 +15,10 @@ export class TracksPageComponent implements OnInit {
   cards: any[] = [];
   zone: Zone = world;
 
+  filteredTracks: any[] = [];
+
+  displayedColumns: string[] = ['name'];
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private zoneService: ZoneService,
@@ -47,6 +51,11 @@ export class TracksPageComponent implements OnInit {
     else{
       this.router.navigate(['/tracks'], { queryParams: { country: card.title } });
     }
+  }
+
+  applyFilter(filter: KeyboardEvent){
+    console.log(filter);
+    console.log((filter.target as HTMLInputElement).value);
   }
 
 }

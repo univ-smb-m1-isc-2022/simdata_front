@@ -42,8 +42,8 @@ export class MapComponent implements OnInit {
       const color = this.sassService.readProperty(layout.grade ? "--data-" + layout.grade : "white");
       console.log(color);
       this.map.addPin({
-        lat: this.tracks[i].coordinates.lat,
-        lng: this.tracks[i].coordinates.lng,
+        lat: this.tracks[i].latitude,
+        lng: this.tracks[i].longitude,
         svgOptions: {color: color, radius: (1 - 0.1 * layout.grade), shape: 'circle'}
       });
     }
