@@ -11,13 +11,23 @@
 <div class="select">
   <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Monza" #input>
   </mat-form-field>
 
   <table mat-table [dataSource]="filteredTracks">
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let track"> {{track.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Country </th>
+      <td mat-cell *matCellDef="let track"> {{track.country}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="layouts">
+      <th mat-header-cell *matHeaderCellDef> Layouts </th>
+      <td mat-cell *matCellDef="let track"> {{ track.layouts.length }} </td>
     </ng-container>
 
 

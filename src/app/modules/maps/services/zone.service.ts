@@ -101,4 +101,17 @@ export class ZoneService {
       })
     );
   }
+
+  public countryInRegion(country: string, region: string): Observable<boolean> {
+    return this.getRegionCountries(region).pipe(
+      map((data) => {
+        for (let i = 0; i < data.length; i++) {
+          if(data[i].name.common === country){
+            return true;
+          }
+        }
+        return false;
+      })
+    );
+  }
 }
