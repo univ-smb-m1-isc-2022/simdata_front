@@ -5,6 +5,7 @@ import {MapsModule} from "../../maps/map.module";
 import {CoreModule} from "../../core/core.module";
 import {MatInputModule} from "@angular/material/input";
 import {MatTableModule} from "@angular/material/table";
+import {CardModule} from "../../widgets/card/card.module";
 
 
 
@@ -17,7 +18,8 @@ import {MatTableModule} from "@angular/material/table";
         MapsModule,
         CoreModule,
         MatInputModule,
-        MatTableModule
+        MatTableModule,
+        CardModule
     ],
   exports: [
     TracksPageComponent

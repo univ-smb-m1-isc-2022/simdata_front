@@ -15,6 +15,7 @@ import {CoreModule} from "./modules/core/core.module";
 import {NavbarModule} from "./modules/navbar/navbar.module";
 import {PagesModule} from "./modules/pages/pages.module";
 import {DatasModule} from "./modules/datas/datas.module";
+import {CardModule} from "./modules/widgets/card/card.module";
 
 @NgModule({
     declarations: [
@@ -33,7 +34,8 @@ import {DatasModule} from "./modules/datas/datas.module";
     CoreModule,
     NavbarModule,
     PagesModule,
-    DatasModule
+    DatasModule,
+    CardModule
   ],
     providers: [],
     bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import type {Card} from "../../models/card.model";
+import type {Card} from "../card.model";
 
 @Component({
   selector: 'app-card',
@@ -8,7 +8,7 @@ import type {Card} from "../../models/card.model";
 })
 export class CardComponent implements OnInit {
 
-  @Input() card: Card = {title: "Title", data: "000"};
+  @Input() card: Card = {title: "Title", data: 0};
 
   constructor() { }
 

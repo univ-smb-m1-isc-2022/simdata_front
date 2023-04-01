@@ -11,7 +11,7 @@ export interface Zone{
 }
 
 export const regions: Zone[] = [
-  { type:TypeZone.REGION, name: "africa",
+  { type:TypeZone.REGION, name: "Africa",
     countries: [
       "DZA", "AGO", "BEN", "BWA", "BFA", "BDI", "CMR", "CAF", "TCD",
       "COG", "COD", "DJI", "EGY", "GNQ", "ERI", "ETH", "GAB", "GMB", "GHA", "GIN", "GNB",
@@ -20,7 +20,7 @@ export const regions: Zone[] = [
       "SSD", "SDN", "SWZ", "TZA", "TGO", "TUN", "UGA", "ZMB", "ZWE","ESH"
     ]
   },
-  { type:TypeZone.REGION, name: "americas",
+  { type:TypeZone.REGION, name: "Americas",
     countries:[
       "ARG", "BHS", "BLZ", "BMU", "BOL", "BRA", "CAN", "CHL",
       "COL", "CRI", "CUB", "DOM", "ECU", "SLV", "GRL", "GTM",
@@ -28,7 +28,7 @@ export const regions: Zone[] = [
       "SUR", "TTO", "USA", "URY", "VEN"
     ]
   },
-  { type:TypeZone.REGION, name: "asia",
+  { type:TypeZone.REGION, name: "Asia",
     countries:[
       "AFG", "ARM", "AZE","BGD", "BTN", "BRN", "KHM", "CHN",
       "GEO", "IND", "IDN", "IRN", "IRQ", "ISR", "JPN", "JOR", "KAZ", "KWT", "KGZ",
@@ -37,7 +37,7 @@ export const regions: Zone[] = [
       "ARE", "UZB", "VNM", "YEM"
     ]
   },
-  { type:TypeZone.REGION, name: "europe",
+  { type:TypeZone.REGION, name: "Europe",
     countries:[
       "ALB", "AUT", "BLR", "BEL", "BIH", "BGR", "HRV", "CYP", "CZE", "DNK", "EST",
       "FIN", "FRA", "DEU", "GRC", "HUN", "ISL", "IRL", "ITA", "KAZ", "LVA", "LTU",
@@ -45,7 +45,7 @@ export const regions: Zone[] = [
       "SRB", "SVK", "SVN", "ESP", "SWE", "CHE", "UKR", "GBR", "NOR", "RUS"
     ]
   },
-  { type:TypeZone.REGION, name: "oceania",
+  { type:TypeZone.REGION, name: "Oceania",
     countries:[]
   },
 ];

@@ -3,6 +3,7 @@ import {Track} from "../../datas/tracks/track.model";
 import {SassHelperService} from "../../core/services/sass-helper/sass-helper.service";
 import {world, Zone} from "../zone.model";
 import {ZoneService} from "../services/zone.service";
+import {BehaviorSubject} from "rxjs";
 
 const DottedMap = require('dotted-map').default;
 @Component({
@@ -13,18 +14,18 @@ const DottedMap = require('dotted-map').default;
 export class MapComponent implements OnInit {
 
   @Input() tracks: Track[] = [];
-  @Input() zone: Zone = world;
+  @Input() zoneSubject:BehaviorSubject<Zone> = new BehaviorSubject<Zone>(world);
+  @Input() zone:Zone = world;
   map: any;
 
   constructor(
     private elementRef: ElementRef,
-    private sassService: SassHelperService,
-    private zoneService: ZoneService
+    private sassService: SassHelperService
   ) { }
 
   ngOnInit(): void {
     this.setMap();
-    this.zoneService.getZone().subscribe(async (zone) => {
+    this.zoneSubject.subscribe((zone:Zone) => {
       this.zone = zone;
       this.update();
     });

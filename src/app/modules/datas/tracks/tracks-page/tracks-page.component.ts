@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ZoneService} from "../../../maps/services/zone.service";
-import {Card} from "../../../core/models/card.model";
+import {Card} from "../../../widgets/card/card.model";
 import {world, Zone} from "../../../maps/zone.model";
 import {Track} from "../track.model";
 import {TrackService} from "../track.service";
-import {count} from "rxjs";
+import {CardService} from "../../../widgets/card/card.service";
+import {BehaviorSubject} from "rxjs";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {count} from "rxjs";
 export class TracksPageComponent implements OnInit {
 
   cards: any[] = [];
-  zone: Zone = world;
+  zone: BehaviorSubject<Zone> = new BehaviorSubject<Zone>(world);
 
   filteredTracks: any[] = [];
 
@@ -28,8 +29,9 @@ export class TracksPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private zoneService: ZoneService,
     private router: Router,
-    private trackService: TrackService
-  ) { }
+    private trackService: TrackService,
+    private cardService: CardService
+  ) {}
 
   ngOnInit(): void {
     let region:string;
@@ -37,34 +39,28 @@ export class TracksPageComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(async (params) => {
       region = params['region']?.replace("%20"," ");
       country = params['country']?.replace("%20"," ");
-      this.zoneService.defineZone(region, country);
-      //filter tracks
-      if(country !== undefined){
-        this.trackService.getTracksByCountry(country).subscribe((tracks) => {
-          this.filteredTracks = tracks;
-          this.baseTracks = tracks;
-        });
-      }
-      else if(region !== undefined){
-        this.trackService.getTracksByRegion(region).subscribe((tracks) => {
-          this.filteredTracks = tracks;
-          this.baseTracks = tracks;
-        });
-      }
-      else{
-        this.trackService.getTracks().subscribe((tracks) => {
-          this.filteredTracks = tracks;
-          this.baseTracks = tracks;
-        });
-      }
-    });
-
-    //A chaque fois que la zone change, on récupère les enfants
-    this.zoneService.getZone().subscribe(async (zone) => {
-      this.zone = zone;
-      this.zoneService.getLinks().subscribe(async (links) => {
-        this.cards = links;
+      this.zoneService.defineZone(region, country).subscribe((zone:Zone) => {
+        this.zone.next(zone);
       });
+      //filter tracks
+      if (country) {
+        this.trackService.getTracksByCountry(country).subscribe(tracks => {
+          this.filteredTracks = this.baseTracks = tracks;
+          this.cards = [];
+        });
+      } else if (region) {
+        this.trackService.getTracksByRegion(region).subscribe(tracks => {
+          this.filteredTracks = this.baseTracks = tracks;
+          this.cards = this.cardService.getCardsByTracks(tracks);
+        });
+      } else {
+        this.trackService.getTracks().subscribe(tracks => {
+          this.filteredTracks = this.baseTracks = tracks;
+          this.cardService.getCardsRegionsByTracks(tracks).subscribe(cards => {
+            this.cards = cards;
+          });
+        });
+      }
     });
   }
 
