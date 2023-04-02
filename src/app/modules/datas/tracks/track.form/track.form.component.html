@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>New Track</h1>
+<mat-dialog-content>
+  <mat-stepper linear #stepper>
+    <mat-step>
+      <form [formGroup]="baseForm">
+        <ng-template matStepLabel>Basic Info</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" (keyup)="checkNameUnique('tracks')">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Country" formControlName="country">
+        </mat-form-field>
+        <app-submit-button [formGroup]="baseForm" (click)="next(stepper)" >next</app-submit-button>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <form [formGroup]="locationForm">
+        <ng-template matStepLabel>Location</ng-template>
+        <mat-form-field>
+          <input matInput type="number" placeholder="latitude" formControlName="latitude">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="number" placeholder="longitude" formControlName="longitude">
+        </mat-form-field>
+        <div class="buttons">
+          <button mat-button (click)="previous(stepper)">Previous</button>
+          <app-submit-button [formGroup]="locationForm" (click)="next(stepper)" >next</app-submit-button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Layouts</ng-template>
+        <div class="layouts-step">
+          <div class="layouts">
+            <div class="new_layout" (click)="onNewLayout()">
+              <mat-icon>add</mat-icon>
+            </div>
+            <app-card *ngFor="let layout of layouts" [card]="{title:layout.name,data:layout.length}"></app-card>
+          </div>
+          <div class="buttons">
+            <button mat-button (click)="previous(stepper)">Previous</button>
+            <button mat-flat-button color="primary" (click)="onValidate()" >Finish</button>
+          </div>
+        </div>
+    </mat-step>
+  </mat-stepper>
+</mat-dialog-content>

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Track} from "../../datas/tracks/track.model";
+import {Track} from "../datas/tracks/track.model";
 import {Card} from "./card.model";
-import {ZoneService} from "../../maps/services/zone.service";
-import {Zone} from "../../maps/zone.model";
+import {ZoneService} from "../maps/services/zone.service";
+import {Zone} from "../maps/zone.model";
 import {Observable, of} from "rxjs";
 
 @Injectable({

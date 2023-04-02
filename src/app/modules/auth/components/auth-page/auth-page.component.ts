@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatButton} from "@angular/material/button";
 import {Router} from "@angular/router";
 import {ThemeService} from "../../../theme/theme.service";
 import {AuthService} from "../../auth.service";
@@ -16,7 +15,6 @@ export class AuthPageComponent implements OnInit {
   signupForm!: FormGroup;
   losSwitch: boolean = false;
 
-  lor: boolean = true;
 
   constructor(
     private authService: AuthService,
@@ -78,44 +76,8 @@ export class AuthPageComponent implements OnInit {
     }
   }
 
-  handleSubmitButtonHover(button: MatButton, formGroup: FormGroup) {
-    if (!formGroup.valid) {
-      //if leftOrRight is true, we move the button to the right, else to the left
-      if (this.lor) {
-        button._elementRef.nativeElement.style.transform =
-          'translateX(calc(150px - ' +
-          button._elementRef.nativeElement.offsetWidth +
-          'px))';
-      } else {
-        button._elementRef.nativeElement.style.transform =
-          'translateX(calc(-150px + ' +
-          button._elementRef.nativeElement.offsetWidth +
-          'px))';
-      }
-      //we change the value of leftOrRight
-      this.lor = !this.lor;
-    }
-  }
-
-  stateOfForm(loginForm: FormGroup): string {
-    //if valid return 'primary',
-    //if invalid and touched return 'warn',
-    //if empty return 'basic'
-    if (loginForm.valid) {
-      return 'primary';
-    } else if (loginForm.touched) {
-      return 'warn';
-    } else {
-      return 'basic';
-    }
-  }
-
   selectForm(login: string) {
     this.losSwitch = login !== 'login';
-  }
-
-  getSassVar(varName: string): string {
-    return this.sassService.readProperty(varName);
   }
 
   validatePasswords(group: FormGroup): null | { notSame: boolean } {

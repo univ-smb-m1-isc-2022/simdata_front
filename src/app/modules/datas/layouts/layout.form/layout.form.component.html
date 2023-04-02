@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>New Layout</h1>
+<mat-dialog-content>
+      <form [formGroup]="layoutForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name" (keyup)="checkNameUnique('tracks')">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Grade" type="number" max="6" min="1" formControlName="grade">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="length" type="number" formControlName="length">
+        </mat-form-field>
+
+        <app-submit-button [formGroup]="layoutForm">next</app-submit-button>
+      </form>
+</mat-dialog-content>

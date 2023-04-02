@@ -8,6 +8,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
+import {WidgetsModule} from "../widgets/widgets.module";
 
 
 
@@ -26,7 +27,8 @@ import {MatIconModule} from "@angular/material/icon";
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    WidgetsModule,
   ]
 })
 export class AuthModule { }

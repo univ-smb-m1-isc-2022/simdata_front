@@ -1,3 +1,9 @@
 @import 'abstracts/colors';
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
+
+
+.buttons{
+  display: flex;
+  gap: 10px;
+}

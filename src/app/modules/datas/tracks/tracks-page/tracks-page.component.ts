@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {ZoneService} from "../../../maps/services/zone.service";
-import {Card} from "../../../widgets/card/card.model";
+import {Card} from "../../../card/card.model";
 import {world, Zone} from "../../../maps/zone.model";
 import {Track} from "../track.model";
 import {TrackService} from "../track.service";
-import {CardService} from "../../../widgets/card/card.service";
-import {BehaviorSubject} from "rxjs";
+import {CardService} from "../../../card/card.service";
+import {BehaviorSubject, Observer} from "rxjs";
+import {MatDialog} from "@angular/material/dialog";
+import {TrackFormComponent} from "../track.form/track.form.component";
+import {Dot} from "../../../maps/map.model";
+import {Layout} from "../../layouts/layout.model";
 
 
 @Component({
@@ -18,6 +22,7 @@ export class TracksPageComponent implements OnInit {
 
   cards: any[] = [];
   zone: BehaviorSubject<Zone> = new BehaviorSubject<Zone>(world);
+  dots: BehaviorSubject<Dot[]> = new BehaviorSubject<Dot[]>([]);
 
   filteredTracks: any[] = [];
 
@@ -30,7 +35,8 @@ export class TracksPageComponent implements OnInit {
     private zoneService: ZoneService,
     private router: Router,
     private trackService: TrackService,
-    private cardService: CardService
+    private cardService: CardService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -47,18 +53,54 @@ export class TracksPageComponent implements OnInit {
         this.trackService.getTracksByCountry(country).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cards = [];
+          this.dots.next(this.defineDots());
         });
       } else if (region) {
         this.trackService.getTracksByRegion(region).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cards = this.cardService.getCardsByTracks(tracks);
+          this.dots.next(this.defineDots());
         });
       } else {
         this.trackService.getTracks().subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cardService.getCardsRegionsByTracks(tracks).subscribe(cards => {
             this.cards = cards;
+            this.dots.next(this.defineDots());
           });
+        });
+      }
+
+    });
+  }
+
+  defineDots(){
+    let dots:Dot[] = [];
+    this.filteredTracks.forEach((track:Track) => {
+      dots.push({
+        latitude: track.latitude,
+        longitude: track.longitude,
+        value: this.bestGrade(track.layouts),
+      })
+    });
+    return dots;
+  }
+
+  bestGrade(layouts: Layout[]){
+    return  layouts.reduce((best, layout) : Layout => {
+      return layout.grade < best.grade ? layout : best;
+    }).grade;
+  }
+
+  newTrack(){
+    let dialogRef = this.dialog.open(TrackFormComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.trackService.addTrack(result).subscribe((track:Track) => {
+          this.baseTracks.push(track);
+          this.filteredTracks = this.baseTracks;
+          console.log(track);
         });
       }
     });

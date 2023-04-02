@@ -1,5 +1,6 @@
 <app-map
   [zoneSubject]="zone"
+  [dotsSubject]="dots"
 ></app-map>
 <div class="cards">
   <app-card
@@ -9,10 +10,17 @@
   ></app-card>
 </div>
 <div class="select">
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Monza" #input>
-  </mat-form-field>
+  <div class="input-line">
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Monza" #input>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="newTrack()">
+      <mat-icon>add</mat-icon>
+      New Track
+    </button>
+  </div>
 
   <table mat-table [dataSource]="filteredTracks">
     <ng-container matColumnDef="name">

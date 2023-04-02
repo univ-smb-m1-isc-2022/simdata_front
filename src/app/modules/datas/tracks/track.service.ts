@@ -25,4 +25,8 @@ export class TrackService {
   getTracksByRegion(region:string):Observable<Track[]> {
     return this.http.get<Track[]>(`${apiUrl}/tracks/region/${region}`);
   }
+
+  addTrack(track: Track) :Observable<Track> {
+    return this.http.post<Track>(`${apiUrl}/track`, track);
+  }
 }

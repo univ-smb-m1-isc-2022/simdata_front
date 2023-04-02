@@ -21,21 +21,13 @@ export const trackTest: Track = {
   longitude: 9.2811,
   layouts: [
     {
-      id: 1,
       name: "Grand Prix",
       grade: 1,
-      date_created: "2020-01-01",
-      date_deleted: null,
-      track_id: 1,
       length: 5.793,
     },
     {
-      id: 2,
       name: "Oval",
       grade: 3,
-      date_created: "2020-01-01",
-      date_deleted: null,
-      track_id: 1,
       length: 3.793,
     }
   ],
