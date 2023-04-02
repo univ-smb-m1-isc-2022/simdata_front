@@ -19,11 +19,11 @@ export class TrackService {
   }
 
   getTracksByCountry(country:string):Observable<Track[]> {
-    return this.http.get<Track[]>(`${apiUrl}/tracks/country/${country}`);
+    return this.http.get<Track[]>(`${apiUrl}/tracks/location/country/${country}`);
   }
 
   getTracksByRegion(region:string):Observable<Track[]> {
-    return this.http.get<Track[]>(`${apiUrl}/tracks/region/${region}`);
+    return this.http.get<Track[]>(`${apiUrl}/tracks/location/region/${region}`);
   }
 
   addTrack(track: Track) :Observable<Track> {

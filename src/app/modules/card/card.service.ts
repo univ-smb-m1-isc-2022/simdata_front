@@ -21,13 +21,13 @@ export class CardService {
       //check if the country of the track is already in the cards
       let found = false;
       for(let card of cards){
-        if(card.title === track.country){
+        if(card.title === track.location.country){
           found = true;
           card.data++;
         }
       }
       if(!found){
-        cards.push({title: track.country, data: 1});
+        cards.push({title: track.location.country, data: 1});
       }
     }
     return cards.sort((a,b) => b.data - a.data);
@@ -41,7 +41,7 @@ export class CardService {
       this.zoneService.getCountriesByRegion(regions[i].name).subscribe(countries => {
         for(let country of countries){
           for(let track of tracks){
-            if(track.country === country.name){
+            if(track.location.country === country.name){
               result[i].data++;
             }
           }

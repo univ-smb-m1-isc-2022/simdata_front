@@ -6,7 +6,7 @@ import {world, Zone} from "../../../maps/zone.model";
 import {Track} from "../track.model";
 import {TrackService} from "../track.service";
 import {CardService} from "../../../card/card.service";
-import {BehaviorSubject, Observer} from "rxjs";
+import {BehaviorSubject, Observable, Observer, of} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {TrackFormComponent} from "../track.form/track.form.component";
 import {Dot} from "../../../maps/map.model";
@@ -24,7 +24,7 @@ export class TracksPageComponent implements OnInit {
   zone: BehaviorSubject<Zone> = new BehaviorSubject<Zone>(world);
   dots: BehaviorSubject<Dot[]> = new BehaviorSubject<Dot[]>([]);
 
-  filteredTracks: any[] = [];
+  filteredTracks: Track[] = [];
 
   baseTracks: Track[] = [];
 
@@ -53,20 +53,20 @@ export class TracksPageComponent implements OnInit {
         this.trackService.getTracksByCountry(country).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cards = [];
-          this.dots.next(this.defineDots());
+          this.defineDots();
         });
       } else if (region) {
         this.trackService.getTracksByRegion(region).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cards = this.cardService.getCardsByTracks(tracks);
-          this.dots.next(this.defineDots());
+          this.defineDots();
         });
       } else {
         this.trackService.getTracks().subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cardService.getCardsRegionsByTracks(tracks).subscribe(cards => {
             this.cards = cards;
-            this.dots.next(this.defineDots());
+            this.defineDots();
           });
         });
       }
@@ -75,15 +75,16 @@ export class TracksPageComponent implements OnInit {
   }
 
   defineDots(){
-    let dots:Dot[] = [];
+    console.log(this.filteredTracks);
     this.filteredTracks.forEach((track:Track) => {
-      dots.push({
-        latitude: track.latitude,
-        longitude: track.longitude,
-        value: this.bestGrade(track.layouts),
-      })
+      this.zoneService.getCoords(track.location.city).subscribe((coords: number[]) => {
+        this.dots.next(this.dots.getValue().concat({
+          latitude: coords[0],
+          longitude: coords[1],
+          value: this.bestGrade(track.layouts),
+        }));
+      });
     });
-    return dots;
   }
 
   bestGrade(layouts: Layout[]){

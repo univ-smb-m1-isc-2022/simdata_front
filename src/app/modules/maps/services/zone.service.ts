@@ -8,7 +8,8 @@ import {map, Observable, of} from "rxjs";
 })
 export class ZoneService {
 
-  url = "https://restcountries.com/v3.1/";
+  countryApiurl = "https://restcountries.com/v3.1/";
+  cityApiUrl = "https://api.api-ninjas.com/v1/";
 
   constructor(
     private http: HttpClient,
@@ -38,7 +39,7 @@ export class ZoneService {
   getCountriesByRegion(region: string): Observable<any[]> {
     const headers = { 'Content-Type': 'application/json' };
 
-    return this.http.get(this.url + `region/${region}?fields=name,cca3,region`,{headers}).pipe(
+    return this.http.get(this.countryApiurl + `region/${region}?fields=name,cca3,region`,{headers}).pipe(
       map((data :any) => {
         data.forEach((country:any) => {
           country.name = country.name.common;
@@ -63,10 +64,24 @@ export class ZoneService {
   }
 
   private getCountryCode(country: string) {
-    return this.http.get<any[]>(this.url + "name/" + country).pipe(
+    return this.http.get<any[]>(this.countryApiurl + "name/" + country).pipe(
       map((data) => {
         console.log(data[0].cca3);
         return data[0].cca3;
+      })
+    );
+  }
+
+  getCoords(city: string) {
+    const headers = {
+      'X-Api-Key': "r2AxCNIEuBt0oCLYovOshA==yjEux5Tqfrdw67XX"
+    }
+    return this.http.get<any[]>(this.cityApiUrl + "city?name=" + city,{headers}).pipe(
+      map((data) => {
+        return [
+          data[0].latitude,
+          data[0].longitude
+        ]
       })
     );
   }

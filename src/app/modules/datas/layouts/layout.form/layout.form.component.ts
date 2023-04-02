@@ -14,6 +14,9 @@ export class LayoutFormComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     grade: new FormControl('', [Validators.required]),
     length: new FormControl('', [Validators.required]),
+    turns: new FormControl('', [Validators.required]),
+    constructionYear: new FormControl('', [Validators.required]),
+    destructionYear: new FormControl(''),
   });
 
   constructor(
@@ -39,7 +42,12 @@ export class LayoutFormComponent implements OnInit {
       {
         name: this.layoutForm.get('name')?.value,
         grade: this.layoutForm.get('grade')?.value,
-        length: this.layoutForm.get('length')?.value
+        length: this.layoutForm.get('length')?.value,
+        turns: this.layoutForm.get('turns')?.value,
+        constructionYear: this.layoutForm.get('constructionYear')?.value,
+        destructionYear: this.layoutForm.get('destructionYear')?.value,
+        tags: [],
+        surface: [],
       }
     );
   }

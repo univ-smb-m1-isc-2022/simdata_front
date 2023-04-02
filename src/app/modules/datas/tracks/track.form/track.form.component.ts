@@ -18,12 +18,13 @@ export class TrackFormComponent implements OnInit {
 
   baseForm: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    country: new FormControl('', [Validators.required]),
+    capacity: new FormControl(''),
   });
 
   locationForm: FormGroup = new FormGroup({
-    latitude: new FormControl('', [Validators.required]),
-    longitude: new FormControl('', [Validators.required]),
+    city: new FormControl(''),
+    country: new FormControl('', [Validators.required]),
+    region: new FormControl('', [Validators.required]),
   });
 
   layouts: Layout[] = [];
@@ -74,9 +75,12 @@ export class TrackFormComponent implements OnInit {
   onValidate() {
     let track = {
       name: this.baseForm.get('name')?.value,
-      country: this.baseForm.get('country')?.value,
-      latitude: this.locationForm.get('latitude')?.value,
-      longitude: this.locationForm.get('longitude')?.value,
+      location: {
+        city: this.locationForm.get('city')?.value,
+        country: this.locationForm.get('country')?.value,
+        region: this.locationForm.get('region')?.value,
+      },
+      capacity: this.baseForm.get('capacity')?.value,
       layouts: this.layouts
     };
     this.dialogRef.close(track);
