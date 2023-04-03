@@ -9,6 +9,10 @@
           <input matInput placeholder="Name" formControlName="name" (keyup)="checkNameUnique('tracks')">
         </mat-form-field>
 
+        <mat-form-field>
+          <input matInput placeholder="Capacity" type="number" formControlName="capacity">
+        </mat-form-field>
+
         <app-submit-button [formGroup]="baseForm" (click)="next(stepper)" >next</app-submit-button>
       </form>
     </mat-step>
