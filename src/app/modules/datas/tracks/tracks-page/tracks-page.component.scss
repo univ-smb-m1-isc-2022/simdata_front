@@ -6,6 +6,8 @@
   gap: 25px;
   width: 100%;
   align-items: stretch;
+  box-sizing: border-box;
+  padding: 0 100px 100px 100px;
 }
 
 app-map{
@@ -22,6 +24,17 @@ app-map{
   justify-content: flex-start;
 }
 
-.select{
-  height: 1000px;
+
+table{
+
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  background: var(--theme-back) !important;
+}
+
+.input-line{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

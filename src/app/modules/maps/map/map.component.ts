@@ -3,6 +3,8 @@ import {Track} from "../../datas/tracks/track.model";
 import {SassHelperService} from "../../core/services/sass-helper/sass-helper.service";
 import {world, Zone} from "../zone.model";
 import {ZoneService} from "../services/zone.service";
+import {BehaviorSubject} from "rxjs";
+import {Dot} from "../map.model";
 
 const DottedMap = require('dotted-map').default;
 @Component({
@@ -12,20 +14,26 @@ const DottedMap = require('dotted-map').default;
 })
 export class MapComponent implements OnInit {
 
-  @Input() tracks: Track[] = [];
-  @Input() zone: Zone = world;
+  @Input() dots: Dot[] = [];
+  @Input() dotsSubject:BehaviorSubject<Dot[]> = new BehaviorSubject<Dot[]>([]);
+  @Input() zoneSubject:BehaviorSubject<Zone> = new BehaviorSubject<Zone>(world);
+  @Input() zone:Zone = world;
   map: any;
 
   constructor(
     private elementRef: ElementRef,
-    private sassService: SassHelperService,
-    private zoneService: ZoneService
+    private sassService: SassHelperService
   ) { }
 
   ngOnInit(): void {
     this.setMap();
-    this.zoneService.getZone().subscribe(async (zone) => {
+    this.zoneSubject.subscribe((zone:Zone) => {
       this.zone = zone;
+      this.update();
+    });
+
+    this.dotsSubject.subscribe((dots:Dot[]) => {
+      this.dots = dots;
       this.update();
     });
   }
@@ -37,16 +45,28 @@ export class MapComponent implements OnInit {
       countries: this.zone.countries
     });
 
+    for (let i = 0; i < this.dots.length; i++) {
+      const color = this.sassService.readProperty(this.dots[i].value ? "--data-" + this.dots[i].value : "white");
+      this.map.addPin({
+        lat: this.dots[i].latitude,
+        lng: this.dots[i].longitude,
+        svgOptions: {color: color, radius: (1 - 0.1 * this.dots[i].value), shape: 'circle'}
+      });
+    }
+
+    /*
     for (let i = 0; i < this.tracks.length; i++) {
       const layout = this.tracks[i].layouts[0];
       const color = this.sassService.readProperty(layout.grade ? "--data-" + layout.grade : "white");
       console.log(color);
       this.map.addPin({
-        lat: this.tracks[i].coordinates.lat,
-        lng: this.tracks[i].coordinates.lng,
+        lat: this.tracks[i].latitude,
+        lng: this.tracks[i].longitude,
         svgOptions: {color: color, radius: (1 - 0.1 * layout.grade), shape: 'circle'}
       });
     }
+
+     */
 
       this.elementRef.nativeElement.innerHTML = "";
       this.elementRef.nativeElement.innerHTML = this.map.getSVG({

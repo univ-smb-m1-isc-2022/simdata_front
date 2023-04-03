@@ -1,0 +1,10 @@
+<button
+  [disabled]="!formGroup.touched"
+  mat-flat-button
+  #submitButton
+  color="{{ stateOfForm() }}"
+  (mouseenter)="handleSubmitButtonHover()"
+  type="submit"
+>
+  <ng-content></ng-content>
+</button>

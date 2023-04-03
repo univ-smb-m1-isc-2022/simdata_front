@@ -15,12 +15,14 @@ import {CoreModule} from "./modules/core/core.module";
 import {NavbarModule} from "./modules/navbar/navbar.module";
 import {PagesModule} from "./modules/pages/pages.module";
 import {DatasModule} from "./modules/datas/datas.module";
+import {CardModule} from "./modules/card/card.module";
+import {WidgetsModule} from "./modules/widgets/widgets.module";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent
-    ],
+  declarations: [
+    AppComponent,
+    HeaderComponent
+  ],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -33,9 +35,11 @@ import {DatasModule} from "./modules/datas/datas.module";
     CoreModule,
     NavbarModule,
     PagesModule,
-    DatasModule
+    DatasModule,
+    CardModule,
+    WidgetsModule
   ],
-    providers: [],
-    bootstrap: [AppComponent]
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

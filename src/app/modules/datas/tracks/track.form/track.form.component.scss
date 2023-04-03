@@ -1,0 +1,29 @@
+.new_layout{
+  height: 80px;
+  aspect-ratio: 4/3;
+  background: var(--theme-back);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.layouts-step{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.layouts{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}

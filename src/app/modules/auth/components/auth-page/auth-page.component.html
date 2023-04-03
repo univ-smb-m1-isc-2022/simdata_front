@@ -12,7 +12,6 @@
   <div class="card__face">
     <h1 class="title">Log In</h1>
     <form
-      class="form form--login"
       [formGroup]="loginForm"
       (ngSubmit)="onLoginSubmit()"
     >
@@ -43,17 +42,7 @@
         <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">Password must be at least 6 characters long</mat-error>
       </mat-form-field>
 
-      <button
-        class="form__submit"
-        [disabled]="!loginForm.touched"
-        mat-flat-button
-        color="{{ stateOfForm(loginForm) }}"
-        #loginButton
-        (mouseenter)="handleSubmitButtonHover(this.loginButton, this.loginForm)"
-        type="submit"
-      >
-        Submit
-      </button>
+      <app-submit-button [formGroup]="loginForm">Login</app-submit-button>
     </form>
     <a>Forgot your password?</a>
   </div>
@@ -61,7 +50,6 @@
   <div class="card__face card__face--back">
     <h1 class="title">Sign Up</h1>
     <form
-      class="form form--login"
       [formGroup]="signupForm"
       (ngSubmit)="onSignupSubmit()"
     >
@@ -120,17 +108,7 @@
         <mat-error *ngIf="signupForm.hasError('notSame')">Passwords must match</mat-error>
       </mat-form-field>
 
-      <button
-        class="form__submit"
-        [disabled]="!signupForm.touched"
-        mat-flat-button
-        #signupButton
-        color="{{ stateOfForm(signupForm) }}"
-        (mouseenter)="handleSubmitButtonHover(this.signupButton, this.signupForm)"
-        type="submit"
-      >
-        Submit
-      </button>
+      <app-submit-button [formGroup]="signupForm">Sign Up</app-submit-button>
     </form>
   </div>
 

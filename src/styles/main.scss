@@ -41,6 +41,7 @@ $simdata_front-theme: mat.define-light-theme((
 
 //base
 @import 'base/body';
+@import 'base/material';
 
 //layout
 
@@ -48,6 +49,7 @@ $simdata_front-theme: mat.define-light-theme((
 @import 'components/buttons';
 @import 'components/inputs';
 @import 'components/scrollbar';
+@import 'components/form';
 
 //pages
 
