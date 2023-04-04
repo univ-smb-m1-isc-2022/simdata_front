@@ -5,6 +5,7 @@ import {Track} from "../track.model";
 import {async} from "rxjs";
 
 @Component({
+  selector: 'app-track.page',
   templateUrl: './track.page.component.html',
   styleUrls: ['./track.page.component.scss']
 })
