@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {TrackService} from "../track.service";
 import {Track} from "../track.model";
-import {async} from "rxjs";
 
 @Component({
   selector: 'app-track.page',
@@ -19,11 +18,10 @@ export class TrackPageComponent implements OnInit {
   track:Track|null = null;
 
   ngOnInit(): void {
-    let trackName = this.activatedRoute.snapshot.url[0].path;
+    let trackName = this.activatedRoute.snapshot.url[1].path;
+    console.log(trackName);
     this.trackService.getTrack(trackName).subscribe(track => {
       this.track = track;
     });
   }
-
-  protected readonly async = async;
 }
