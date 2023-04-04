@@ -1,4 +1,4 @@
-import {Coordinates} from "../../core/models/coordinates.model";
+import {Coordinates} from "../../../../core/models/coordinates.model";
 
 export interface Layout {
   name: string;

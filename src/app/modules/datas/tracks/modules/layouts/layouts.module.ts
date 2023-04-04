@@ -8,13 +8,16 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from "@angular/material/stepper";
-import {WidgetsModule} from "../../widgets/widgets.module";
+import {WidgetsModule} from "../../../../widgets/widgets.module";
+import { LayoutComponent } from './layout/layout.component';
+import {DatasModule} from "../../../datas.module";
 
 
 
 @NgModule({
   declarations: [
-    LayoutFormComponent
+    LayoutFormComponent,
+    LayoutComponent
   ],
   imports: [
     CommonModule,
@@ -26,10 +29,12 @@ import {WidgetsModule} from "../../widgets/widgets.module";
     MatInputModule,
     MatStepperModule,
     ReactiveFormsModule,
-    WidgetsModule
+    WidgetsModule,
+    DatasModule
   ],
   exports: [
-    LayoutFormComponent
+    LayoutFormComponent,
+    LayoutComponent
   ]
 })
 export class LayoutsModule { }

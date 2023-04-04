@@ -1,19 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {TracksModule} from "./tracks/tracks.module";
-import {LayoutsModule} from "./layouts/layouts.module";
+import { DataComponent } from './data/data.component';
 
 
 
 @NgModule({
   declarations: [
+    DataComponent
   ],
   exports: [
+    DataComponent
   ],
   imports: [
-    CommonModule,
-    TracksModule,
-    LayoutsModule
+    CommonModule
   ]
 })
 export class DatasModule { }

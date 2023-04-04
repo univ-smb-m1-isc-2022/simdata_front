@@ -3,7 +3,7 @@ import { apiUrl} from "../../../global";
 import {Observable} from "rxjs";
 import {Track} from "./track.model";
 import {HttpClient} from "@angular/common/http";
-import {Layout} from "../layouts/layout.model";
+import {Layout} from "./modules/layouts/layout.model";
 
 @Injectable({
   providedIn: 'root'

@@ -16,6 +16,9 @@ import {WidgetsModule} from "../../widgets/widgets.module";
 import { TrackPageComponent } from './track.page/track.page.component';
 import {TracksRoutingModule} from "./tracks.routing.module";
 import {AuthModule} from "../../auth/auth.module";
+import {LocationsModule} from "./modules/locations/locations.module";
+import {DatasModule} from "../datas.module";
+import {LayoutsModule} from "./modules/layouts/layouts.module";
 
 
 
@@ -39,7 +42,10 @@ import {AuthModule} from "../../auth/auth.module";
     ReactiveFormsModule,
     WidgetsModule,
     TracksRoutingModule,
-    AuthModule
+    AuthModule,
+    LocationsModule,
+    DatasModule,
+    LayoutsModule
   ],
   exports: [
     TracksPageComponent,

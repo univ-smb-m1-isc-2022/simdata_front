@@ -12,12 +12,7 @@ export interface Zone{
   countries: string[];
 }
 
-export interface Location{
-  coordinates: Coordinates;
-  city: string;
-  country: string;
-  region: string;
-}
+
 
 export const regions: Zone[] = [
   { type:TypeZone.REGION, name: "Africa",

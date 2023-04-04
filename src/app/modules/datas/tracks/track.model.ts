@@ -1,6 +1,5 @@
-import {Layout} from "../layouts/layout.model";
-import {Coordinates} from "../../core/models/coordinates.model";
-import {Location} from "../../maps/zone.model";
+import {Layout} from "./modules/layouts/layout.model";
+import {Location} from "./modules/locations/location.model";
 
 export class Track {
   name: string;

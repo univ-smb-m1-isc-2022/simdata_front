@@ -17,6 +17,8 @@ import {PagesModule} from "./modules/pages/pages.module";
 import {DatasModule} from "./modules/datas/datas.module";
 import {CardModule} from "./modules/card/card.module";
 import {WidgetsModule} from "./modules/widgets/widgets.module";
+import {TracksModule} from "./modules/datas/tracks/tracks.module";
+import {LayoutsModule} from "./modules/datas/tracks/modules/layouts/layouts.module";
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {WidgetsModule} from "./modules/widgets/widgets.module";
     PagesModule,
     DatasModule,
     CardModule,
-    WidgetsModule
+    WidgetsModule,
+    TracksModule,
+    LayoutsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
