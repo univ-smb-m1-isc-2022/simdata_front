@@ -3,6 +3,7 @@ import { apiUrl} from "../../../global";
 import {Observable} from "rxjs";
 import {Track} from "./track.model";
 import {HttpClient} from "@angular/common/http";
+import {Layout} from "../layouts/layout.model";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,11 @@ export class TrackService {
 
   getTrack(name:string):Observable<Track> {
     return this.http.get<Track>(`${apiUrl}/tracks/${name}`);
+  }
+
+  bestGrade(track: Track): number {
+    return track.layouts.reduce((best, layout) : Layout => {
+      return layout.grade < best.grade ? layout : best;
+    }).grade;
   }
 }

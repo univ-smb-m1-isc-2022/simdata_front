@@ -6,7 +6,7 @@ import {world, Zone} from "../../../maps/zone.model";
 import {Track} from "../track.model";
 import {TrackService} from "../track.service";
 import {CardService} from "../../../card/card.service";
-import {BehaviorSubject, Observable, Observer, of} from "rxjs";
+import {BehaviorSubject, Observable, Observer, of, take} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {TrackFormComponent} from "../track.form/track.form.component";
 import {Dot} from "../../../maps/map.model";
@@ -45,26 +45,26 @@ export class TracksPageComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(async (params) => {
       region = params['region']?.replace("%20"," ");
       country = params['country']?.replace("%20"," ");
-      this.zoneService.defineZone(region, country).subscribe((zone:Zone) => {
+      this.zoneService.defineZone(region, country).pipe(take(1)).subscribe((zone:Zone) => {
         this.zone.next(zone);
       });
       //filter tracks
       if (country) {
-        this.trackService.getTracksByCountry(country).subscribe(tracks => {
+        this.trackService.getTracksByCountry(country).pipe(take(1)).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cards = [];
           this.defineDots();
         });
       } else if (region) {
-        this.trackService.getTracksByRegion(region).subscribe(tracks => {
+        this.trackService.getTracksByRegion(region).pipe(take(1)).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
           this.cards = this.cardService.getCardsByTracks(tracks);
           this.defineDots();
         });
       } else {
-        this.trackService.getTracks().subscribe(tracks => {
+        this.trackService.getTracks().pipe(take(1)).subscribe(tracks => {
           this.filteredTracks = this.baseTracks = tracks;
-          this.cardService.getCardsRegionsByTracks(tracks).subscribe(cards => {
+          this.cardService.getCardsRegionsByTracks(tracks).pipe(take(1)).subscribe(cards => {
             this.cards = cards;
             this.defineDots();
           });
@@ -82,16 +82,10 @@ export class TracksPageComponent implements OnInit {
           {
             latitude : track.location.coordinates.latitude,
             longitude : track.location.coordinates.longitude,
-            value : this.bestGrade(track.layouts)
+            value : this.trackService.bestGrade(track)
           })
       );
     });
-  }
-
-  bestGrade(layouts: Layout[]){
-    return  layouts.reduce((best, layout) : Layout => {
-      return layout.grade < best.grade ? layout : best;
-    }).grade;
   }
 
   newTrack(){

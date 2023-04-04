@@ -54,20 +54,6 @@ export class MapComponent implements OnInit {
       });
     }
 
-    /*
-    for (let i = 0; i < this.tracks.length; i++) {
-      const layout = this.tracks[i].layouts[0];
-      const color = this.sassService.readProperty(layout.grade ? "--data-" + layout.grade : "white");
-      console.log(color);
-      this.map.addPin({
-        lat: this.tracks[i].latitude,
-        lng: this.tracks[i].longitude,
-        svgOptions: {color: color, radius: (1 - 0.1 * layout.grade), shape: 'circle'}
-      });
-    }
-
-     */
-
       this.elementRef.nativeElement.innerHTML = "";
       this.elementRef.nativeElement.innerHTML = this.map.getSVG({
         radius: 0.22,

@@ -40,7 +40,9 @@ import {TracksRoutingModule} from "./tracks.routing.module";
     TracksRoutingModule
   ],
   exports: [
-    TracksPageComponent
+    TracksPageComponent,
+    TrackFormComponent,
+    TrackPageComponent
   ]
 })
 export class TracksModule { }

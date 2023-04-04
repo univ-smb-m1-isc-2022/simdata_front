@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {userConnectedSubject} from "./auth.store";
 import {UserService} from "../users/user.service";
 import {apiUrl} from "../../global";
+import {take} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,7 @@ export class AuthService {
           { email: email, password: password },
           { headers: this.headers }
         )
+        .pipe(take(1))
         .subscribe((data: any) => {
           if (data !== null) {
             this.cookieService.set('auth-token', data.token, 100);
@@ -60,6 +62,7 @@ export class AuthService {
           { username: username, email: email, password: password },
           { headers: this.headers }
         )
+        .pipe(take(1))
         .subscribe((data: any) => {
           if (data !== null) {
             this.cookieService.set('auth-token', data.token, 100);

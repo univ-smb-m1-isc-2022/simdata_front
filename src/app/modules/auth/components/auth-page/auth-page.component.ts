@@ -20,8 +20,7 @@ export class AuthPageComponent implements OnInit {
     private authService: AuthService,
     private formBuilder: FormBuilder,
     private router: Router,
-    public themeService: ThemeService,
-    private sassService: SassHelperService
+    public themeService: ThemeService
   ) {}
 
   ngOnInit(): void {

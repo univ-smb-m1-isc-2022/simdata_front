@@ -3,7 +3,7 @@ import {Track} from "../datas/tracks/track.model";
 import {Card} from "./card.model";
 import {ZoneService} from "../maps/services/zone.service";
 import {Zone} from "../maps/zone.model";
-import {Observable, of} from "rxjs";
+import {Observable, of, take} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class CardService {
     let regions:Zone[] = this.zoneService.getRegions();
     for(let i = 0; i < regions.length; i++){
       result.push({title: regions[i].name, data: 0});
-      this.zoneService.getCountriesByRegion(regions[i].name).subscribe(countries => {
+      this.zoneService.getCountriesByRegion(regions[i].name).pipe(take(1)).subscribe(countries => {
         for(let country of countries){
           for(let track of tracks){
             if(track.location.country === country.name){

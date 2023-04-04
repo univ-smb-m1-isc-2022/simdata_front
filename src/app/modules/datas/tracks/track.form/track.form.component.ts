@@ -8,6 +8,8 @@ import {Layout} from "../../layouts/layout.model";
 import {Dot} from "../../../maps/map.model";
 import {Coordinates} from "../../../core/models/coordinates.model";
 import {ZoneService} from "../../../maps/services/zone.service";
+import {take} from "rxjs";
+import {Track} from "../track.model";
 
 @Component({
   selector: 'app-track.form',
@@ -46,7 +48,7 @@ export class TrackFormComponent implements OnInit {
   checkNameUnique(objName:string) {
     let name:string = this.baseForm.get('name')?.value;
     if (name) {
-      this.dataService.checkNameUnique(objName, name).subscribe((res) => {
+      this.dataService.checkNameUnique(objName, name).pipe(take(1)).subscribe((res) => {
         if (res) {
           this.baseForm.get('name')?.setErrors({unique: true});
         }
@@ -76,18 +78,18 @@ export class TrackFormComponent implements OnInit {
   }
 
   onValidate() {
-    this.zoneService.getCoords(this.locationForm.get('city')?.value).subscribe((coords:Coordinates) => {
-    let track = {
-      name: this.baseForm.get('name')?.value,
-      location: {
+    this.zoneService.getCoords(this.locationForm.get('city')?.value).pipe(take(1)).subscribe((coords:Coordinates) => {
+    let track:Track = new Track(
+      this.baseForm.get('name')?.value,
+      {
         coordinates : coords,
         city: this.locationForm.get('city')?.value,
         country: this.locationForm.get('country')?.value,
         region: this.locationForm.get('region')?.value,
       },
-      capacity: this.baseForm.get('capacity')?.value,
-      layouts: this.layouts
-    };
+      this.baseForm.get('capacity')?.value,
+      this.layouts
+    );
     this.dialogRef.close(track);
   }
   )}

@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUserConnectedObs().subscribe(user => {
       this.user = user;
-      console.log(user);
     });
     //get the url
     this.activatedRoute.url.subscribe(url => {

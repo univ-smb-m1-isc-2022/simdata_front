@@ -9,9 +9,9 @@ import {TrackPageComponent} from "../datas/tracks/track.page/track.page.componen
 const routes: Routes = [
 
   { path: 'home', component: HomePageComponent},
-  /*{ path: 'tracks', loadChildren: () => import('../datas/tracks/tracks.module').then(m => m.TracksModule) },*/
-  { path: 'tracks/:name', component: TrackPageComponent},
-  { path: 'tracks', component: TracksPageComponent},
+  { path: 'tracks', loadChildren: () => import('../datas/tracks/tracks.module').then(m => m.TracksModule) },
+  /*{ path: 'tracks/:name', component: TrackPageComponent},
+  { path: 'tracks', component: TracksPageComponent},*/
   //else redirect to home
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
