@@ -29,4 +29,8 @@ export class TrackService {
   addTrack(track: Track) :Observable<Track> {
     return this.http.post<Track>(`${apiUrl}/track`, track);
   }
+
+  getTrack(name:string):Observable<Track> {
+    return this.http.get<Track>(`${apiUrl}/tracks/${name}`);
+  }
 }

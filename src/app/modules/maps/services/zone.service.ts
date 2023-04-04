@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {TypeZone, Zone, regions, world} from "../zone.model";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable, of} from "rxjs";
+import {Coordinates} from "../../core/models/coordinates.model";
 
 @Injectable({
   providedIn: 'root'
@@ -72,16 +73,15 @@ export class ZoneService {
     );
   }
 
-  getCoords(city: string) {
+  getCoords(city: string): Observable<Coordinates> {
     const headers = {
       'X-Api-Key': "r2AxCNIEuBt0oCLYovOshA==yjEux5Tqfrdw67XX"
     }
     return this.http.get<any[]>(this.cityApiUrl + "city?name=" + city,{headers}).pipe(
       map((data) => {
-        return [
-          data[0].latitude,
-          data[0].longitude
-        ]
+        return {
+          latitude: data[0].latitude,
+          longitude: data[0].longitude};
       })
     );
   }

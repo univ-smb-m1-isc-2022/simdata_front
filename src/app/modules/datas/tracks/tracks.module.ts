@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TracksPageComponent } from './tracks-page/tracks-page.component';
+import { TracksPageComponent } from './tracks.page/tracks.page.component';
 import {MapsModule} from "../../maps/map.module";
 import {CoreModule} from "../../core/core.module";
 import {MatInputModule} from "@angular/material/input";
@@ -13,13 +13,16 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatStepperModule} from "@angular/material/stepper";
 import {ReactiveFormsModule} from "@angular/forms";
 import {WidgetsModule} from "../../widgets/widgets.module";
+import { TrackPageComponent } from './track.page/track.page.component';
+import {TracksRoutingModule} from "./tracks.routing.module";
 
 
 
 @NgModule({
   declarations: [
     TracksPageComponent,
-    TrackFormComponent
+    TrackFormComponent,
+    TrackPageComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +36,8 @@ import {WidgetsModule} from "../../widgets/widgets.module";
     MatDialogModule,
     MatStepperModule,
     ReactiveFormsModule,
-    WidgetsModule
+    WidgetsModule,
+    TracksRoutingModule
   ],
   exports: [
     TracksPageComponent

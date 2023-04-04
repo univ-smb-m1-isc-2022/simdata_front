@@ -6,6 +6,8 @@ import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LayoutFormComponent} from "../../layouts/layout.form/layout.form.component";
 import {Layout} from "../../layouts/layout.model";
 import {Dot} from "../../../maps/map.model";
+import {Coordinates} from "../../../core/models/coordinates.model";
+import {ZoneService} from "../../../maps/services/zone.service";
 
 @Component({
   selector: 'app-track.form',
@@ -33,6 +35,7 @@ export class TrackFormComponent implements OnInit {
     private dataService: DataService,
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<TrackFormComponent>,
+    private zoneService: ZoneService,
   ) {
     this.layouts = [];
   }
@@ -73,9 +76,11 @@ export class TrackFormComponent implements OnInit {
   }
 
   onValidate() {
+    this.zoneService.getCoords(this.locationForm.get('city')?.value).subscribe((coords:Coordinates) => {
     let track = {
       name: this.baseForm.get('name')?.value,
       location: {
+        coordinates : coords,
         city: this.locationForm.get('city')?.value,
         country: this.locationForm.get('country')?.value,
         region: this.locationForm.get('region')?.value,
@@ -85,4 +90,5 @@ export class TrackFormComponent implements OnInit {
     };
     this.dialogRef.close(track);
   }
+  )}
 }

@@ -15,8 +15,8 @@ import {Layout} from "../../layouts/layout.model";
 
 @Component({
   selector: 'app-tracks-page',
-  templateUrl: './tracks-page.component.html',
-  styleUrls: ['./tracks-page.component.scss']
+  templateUrl: './tracks.page.component.html',
+  styleUrls: ['./tracks.page.component.scss']
 })
 export class TracksPageComponent implements OnInit {
 
@@ -75,15 +75,16 @@ export class TracksPageComponent implements OnInit {
   }
 
   defineDots(){
-    console.log(this.filteredTracks);
+    this.dots.next([]);
     this.filteredTracks.forEach((track:Track) => {
-      this.zoneService.getCoords(track.location.city).subscribe((coords: number[]) => {
-        this.dots.next(this.dots.getValue().concat({
-          latitude: coords[0],
-          longitude: coords[1],
-          value: this.bestGrade(track.layouts),
-        }));
-      });
+      this.dots.next(
+        this.dots.getValue().concat(
+          {
+            latitude : track.location.coordinates.latitude,
+            longitude : track.location.coordinates.longitude,
+            value : this.bestGrade(track.layouts)
+          })
+      );
     });
   }
 
@@ -126,6 +127,10 @@ export class TracksPageComponent implements OnInit {
     this.filteredTracks = this.baseTracks.filter((track) => {
       return track.name.toLowerCase().includes(filterValue.toLowerCase());
     });
+  }
+
+  onRowClicked(row: any){
+    this.router.navigate(['/tracks', row.name]);
   }
 
 }

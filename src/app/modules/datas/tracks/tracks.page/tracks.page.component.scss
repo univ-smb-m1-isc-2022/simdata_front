@@ -1,13 +1,7 @@
 :host{
+  gap: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  justify-items: center;
-  gap: 25px;
-  width: 100%;
-  align-items: stretch;
-  box-sizing: border-box;
-  padding: 0 100px 100px 100px;
 }
 
 app-map{
@@ -37,4 +31,8 @@ table{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.row{
+  cursor: pointer;
 }
