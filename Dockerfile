@@ -9,6 +9,6 @@
 #COPY --from=node /app/dist/simdata_front /usr/share/nginx/html
 
 FROM nginx:alpine
-COPY /dist/finances-perso-front /usr/share/nginx/html
+COPY --from=node /app/dist/simdata_front /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 
