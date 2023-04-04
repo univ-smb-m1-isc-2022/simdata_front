@@ -21,7 +21,6 @@
     align-items: stretch;
     width: 100%;
     box-sizing: border-box;
-    padding: 0 100px 100px 100px;
     justify-content: flex-start;
     justify-items: center;
   }
@@ -31,4 +30,10 @@
   }
 }
 
+
+.version{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
 

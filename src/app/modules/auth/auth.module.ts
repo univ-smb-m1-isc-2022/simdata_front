@@ -9,6 +9,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {MatIconModule} from "@angular/material/icon";
 import {WidgetsModule} from "../widgets/widgets.module";
+import {AuthService} from "./auth.service";
 
 
 
@@ -29,6 +30,9 @@ import {WidgetsModule} from "../widgets/widgets.module";
     MatInputModule,
     MatIconModule,
     WidgetsModule,
+  ],
+  providers: [
+    AuthService
   ]
 })
 export class AuthModule { }

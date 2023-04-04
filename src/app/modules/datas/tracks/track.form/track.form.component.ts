@@ -5,7 +5,6 @@ import {MatStepper} from "@angular/material/stepper";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LayoutFormComponent} from "../../layouts/layout.form/layout.form.component";
 import {Layout} from "../../layouts/layout.model";
-import {Dot} from "../../../maps/map.model";
 import {Coordinates} from "../../../core/models/coordinates.model";
 import {ZoneService} from "../../../maps/services/zone.service";
 import {take} from "rxjs";

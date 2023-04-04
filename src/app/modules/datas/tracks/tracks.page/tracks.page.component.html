@@ -16,7 +16,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Monza" #input>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="newTrack()">
+    <button *ngIf="user" mat-raised-button color="primary" (click)="newTrack()">
       <mat-icon>add</mat-icon>
       New Track
     </button>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavigationStart, Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -17,5 +18,9 @@ export class AppComponent {
         this.showHead = event['url'] != '/login';
       }
     });
+  }
+
+  isLoginPage(){
+    return this.router.url == '/login';
   }
 }

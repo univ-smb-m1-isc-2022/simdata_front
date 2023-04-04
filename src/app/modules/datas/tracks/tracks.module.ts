@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {WidgetsModule} from "../../widgets/widgets.module";
 import { TrackPageComponent } from './track.page/track.page.component';
 import {TracksRoutingModule} from "./tracks.routing.module";
+import {AuthModule} from "../../auth/auth.module";
 
 
 
@@ -37,7 +38,8 @@ import {TracksRoutingModule} from "./tracks.routing.module";
     MatStepperModule,
     ReactiveFormsModule,
     WidgetsModule,
-    TracksRoutingModule
+    TracksRoutingModule,
+    AuthModule
   ],
   exports: [
     TracksPageComponent,

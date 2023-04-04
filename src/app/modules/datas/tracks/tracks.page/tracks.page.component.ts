@@ -10,7 +10,8 @@ import {BehaviorSubject, Observable, Observer, of, take} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {TrackFormComponent} from "../track.form/track.form.component";
 import {Dot} from "../../../maps/map.model";
-import {Layout} from "../../layouts/layout.model";
+import {AuthService} from "../../../auth/auth.service";
+import {User} from "../../../users/user.model";
 
 
 @Component({
@@ -23,11 +24,10 @@ export class TracksPageComponent implements OnInit {
   cards: any[] = [];
   zone: BehaviorSubject<Zone> = new BehaviorSubject<Zone>(world);
   dots: BehaviorSubject<Dot[]> = new BehaviorSubject<Dot[]>([]);
+  user: User | null = null;
 
   filteredTracks: Track[] = [];
-
   baseTracks: Track[] = [];
-
   displayedColumns: string[] = ['name', 'country', 'layouts'];
 
   constructor(
@@ -36,7 +36,8 @@ export class TracksPageComponent implements OnInit {
     private router: Router,
     private trackService: TrackService,
     private cardService: CardService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +71,10 @@ export class TracksPageComponent implements OnInit {
           });
         });
       }
+    });
 
+    this.authService.getUserConnectedObs().subscribe((user) => {
+      this.user = user;
     });
   }
 

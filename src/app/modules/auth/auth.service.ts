@@ -81,6 +81,10 @@ export class AuthService {
     return userConnectedSubject.getValue();
   }
 
+  isConnected(): boolean {
+    return this.cookieService.get('auth-token') !== undefined;
+  }
+
   getUserConnectedObs(){
     return userConnectedSubject.asObservable();
   }

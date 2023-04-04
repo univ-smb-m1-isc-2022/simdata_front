@@ -1,9 +1,11 @@
 <app-navbar class="nav-bar" *ngIf="showHead"></app-navbar>
 <main class="main" [ngClass]="{'main--login': !showHead}">
   <app-header class="header" *ngIf="showHead"></app-header>
-  <div class="content">
+  <div class="content" [ngClass]="{'content_page': !isLoginPage()}">
     <router-outlet></router-outlet>
   </div>
 </main>
-
+<div class="version">
+  <span>0.1</span>
+</div>
 
