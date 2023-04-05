@@ -16,9 +16,9 @@ import {WidgetsModule} from "../../widgets/widgets.module";
 import { TrackPageComponent } from './track.page/track.page.component';
 import {TracksRoutingModule} from "./tracks.routing.module";
 import {AuthModule} from "../../auth/auth.module";
-import {LocationsModule} from "./modules/locations/locations.module";
 import {DatasModule} from "../datas.module";
 import {LayoutsModule} from "./modules/layouts/layouts.module";
+import {SimDataSharedModule} from "../../sim-data-shared/sim-data-shared.module";
 
 
 
@@ -43,9 +43,9 @@ import {LayoutsModule} from "./modules/layouts/layouts.module";
     WidgetsModule,
     TracksRoutingModule,
     AuthModule,
-    LocationsModule,
     DatasModule,
-    LayoutsModule
+    LayoutsModule,
+    SimDataSharedModule
   ],
   exports: [
     TracksPageComponent,

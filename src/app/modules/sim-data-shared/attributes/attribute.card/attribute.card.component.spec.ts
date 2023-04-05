@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocationComponent } from './location.component';
+import { AttributeCardComponent } from './attribute.card.component';
 
-describe('LocationComponent', () => {
-  let component: LocationComponent;
-  let fixture: ComponentFixture<LocationComponent>;
+describe('AttributeCardComponent', () => {
+  let component: AttributeCardComponent;
+  let fixture: ComponentFixture<AttributeCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LocationComponent ]
+      declarations: [ AttributeCardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LocationComponent);
+    fixture = TestBed.createComponent(AttributeCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

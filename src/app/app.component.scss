@@ -1,6 +1,6 @@
 :host{
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: max-content auto max-content;
   width: 100vw;
   height: 100vh;
 }
@@ -9,12 +9,11 @@
 .main{
   display: grid;
   grid-template-rows: max-content;
-  gap: 25px;
-  padding: 25px 25px 0 25px;
   box-sizing: border-box;
   height: inherit;
 
   .content{
+    padding-top: 25px;
     display: flex;
     flex-direction: column;
     overflow-y: auto;

@@ -1,0 +1,5 @@
+<app-attribute-card
+  *ngFor="let attribute of object.attributes"
+  [attribute]="attribute"
+  [ngClass]="{'app-attribute-card--selected': attribute === attributeSelected}">
+</app-attribute-card>

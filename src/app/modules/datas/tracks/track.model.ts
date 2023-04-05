@@ -1,5 +1,5 @@
 import {Layout} from "./modules/layouts/layout.model";
-import {Location} from "./modules/locations/location.model";
+import {Location} from "../../core/models/location.model";
 
 export class Track {
   name: string;

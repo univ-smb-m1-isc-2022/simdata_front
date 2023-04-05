@@ -27,8 +27,8 @@ $theme:(
 //colors of data light theme
 $theme-map-light: (
   '--theme-text': $--color-dark,
-  '--theme-back': $--color-light,
-  '--theme-back2': lighten($--color-light, 10%),
+  '--theme-back': lighten($--color-light, 10%),
+  '--theme-back2': $--color-light,
 );
 
 //colors of data dark theme

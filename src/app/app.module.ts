@@ -19,6 +19,8 @@ import {CardModule} from "./modules/card/card.module";
 import {WidgetsModule} from "./modules/widgets/widgets.module";
 import {TracksModule} from "./modules/datas/tracks/tracks.module";
 import {LayoutsModule} from "./modules/datas/tracks/modules/layouts/layouts.module";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {SimDataSharedModule} from "./modules/sim-data-shared/sim-data-shared.module";
 
 @NgModule({
   declarations: [
@@ -35,13 +37,15 @@ import {LayoutsModule} from "./modules/datas/tracks/modules/layouts/layouts.modu
     MatIconModule,
     MatButtonModule,
     CoreModule,
+    TracksModule,
     NavbarModule,
     PagesModule,
     DatasModule,
     CardModule,
     WidgetsModule,
-    TracksModule,
-    LayoutsModule
+    LayoutsModule,
+    MatSidenavModule,
+    SimDataSharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

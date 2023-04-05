@@ -1,0 +1,8 @@
+<h2 (click)="selectAttribute()">{{attribute.name}}</h2>
+<ng-template [ngIf]="isValueObject()" [ngIfElse]="simpleValue">
+  <app-object [object]="attribute.datas[0]"></app-object>
+  <!--<span> pouet </span>-->
+</ng-template>
+<ng-template #simpleValue>
+  <span >{{attribute.value}}</span>
+</ng-template>

@@ -1,20 +1,4 @@
 <ng-template [ngIf]="track">
-  <h1>{{track.name}}</h1>
-  <!--<app-map [dots]="dots" [zoneSubject]="zoneSubject"></app-map>-->
-  <div class="data__info">
-    <app-data label="Capacity">
-      <span>{{track.capacity}} persons</span>
-    </app-data>
-
-    <app-data label="Location">
-      <app-location class="data__value" [location]="track.location"></app-location>
-    </app-data>
-
-  </div>
-  <app-data label="Layouts">
-    <div class="layouts">
-      <app-layout *ngFor="let layout of track.layouts" [layout]="layout"></app-layout>
-    </div>
-  </app-data>
+  <app-object [object]="track"></app-object>
 </ng-template>
 
