@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Track} from "./track.model";
 import {HttpClient} from "@angular/common/http";
 import {Layout} from "./modules/layouts/layout.model";
+import {CookieService} from "../../core/services/cookie/cookie.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import {Layout} from "./modules/layouts/layout.model";
 export class TrackService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookieService: CookieService
   ) { }
 
 
@@ -28,7 +30,11 @@ export class TrackService {
   }
 
   addTrack(track: Track) :Observable<Track> {
-    return this.http.post<Track>(`${apiUrl}/track`, track);
+    const token = this.cookieService.get('auth-token');
+    if (!token) {
+      throw new Error('Token not found');
+    }
+    return this.http.post<Track>(`${apiUrl}/track`, {'track' : track, 'token': token});
   }
 
   getTrack(name:string):Observable<Track> {

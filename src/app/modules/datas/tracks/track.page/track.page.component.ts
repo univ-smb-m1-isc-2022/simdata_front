@@ -13,7 +13,7 @@ import {Object} from "../../../sim-data-shared/object/object.model";
 })
 export class TrackPageComponent implements OnInit {
 
-  track!:Object;
+  trackObject:Object | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,7 +25,7 @@ export class TrackPageComponent implements OnInit {
     let trackName = url[url.length - 1].path;
     this.dataService.getId("track", trackName).pipe(take(1)).subscribe((id: number) => {
       this.dataService.get(id).pipe(take(1)).subscribe((track: Object) => {
-        this.track = track;
+        this.trackObject = track;
       });
     });
   }
