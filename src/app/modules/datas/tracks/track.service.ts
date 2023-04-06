@@ -46,4 +46,8 @@ export class TrackService {
       return layout.grade < best.grade ? layout : best;
     }).grade;
   }
+
+  deleteTrack(track: Track) {
+    return this.http.delete(`${apiUrl}/track/${track.name}`);
+  }
 }

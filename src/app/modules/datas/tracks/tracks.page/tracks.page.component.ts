@@ -28,7 +28,7 @@ export class TracksPageComponent implements OnInit {
 
   filteredTracks: Track[] = [];
   baseTracks: Track[] = [];
-  displayedColumns: string[] = ['name', 'country', 'layouts'];
+  displayedColumns: string[] = ['name', 'country', 'layouts', 'actions'];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -127,8 +127,19 @@ export class TracksPageComponent implements OnInit {
     });
   }
 
-  onRowClicked(row: any){
+  editTrack(row: any){
     this.router.navigate(['/tracks', row.name]);
   }
 
+  deleteTrack(track:Track) {
+    this.trackService.deleteTrack(track).subscribe(() => {
+      this.baseTracks = this.baseTracks.filter((t) => {
+        return t.name !== track.name;
+      });
+      this.filteredTracks = this.filteredTracks.filter((t) => {
+        return t.name !== track.name;
+      });
+    });
+
+  }
 }
